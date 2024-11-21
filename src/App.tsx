@@ -1,9 +1,11 @@
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import useAuth from './context/AuthProvider'
 import HomePage from './pages'
 import LoginPage from './pages/login'
 import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
+  const { auth } = useAuth()
   return (
     <Routes>
       <Route element={<PrivateRoutes />}>
@@ -13,7 +15,7 @@ function App() {
         />
       </Route>
       <Route
-        element={<LoginPage />}
+        element={auth ? <Navigate to={'/'} /> : <LoginPage />}
         path='/login'
       />
     </Routes>

@@ -1,15 +1,19 @@
 // TODO: add some error handling
-import { FormEvent, useContext, useState } from 'react'
+import { FormEvent, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../components'
-import AuthContext from '../context/AuthProvider'
+import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
 
 const LOGIN_URL = '/login'
 
 function LoginPage() {
-  const { saveAuth } = useContext(AuthContext)
+  const { auth, setAuth } = useAuth()
+  const navigate = useNavigate()
   const [username, setUsername] = useState('202110500133')
   const [password, setPassword] = useState('password')
+  const [errorMsg, setErrorMsg] = useState('')
+  const errorRef = useRef()
 
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -18,17 +22,17 @@ function LoginPage() {
         LOGIN_URL,
         JSON.stringify({ username, password }),
         {
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           withCredentials: true,
         },
       )
-      console.log(JSON.stringify(res.data))
-      const token = res.data.token
-      saveAuth({ username, token })
+      setAuth({
+        token: res.data.token,
+        userData: { id: res.data.user.id, username: res.data.user.username },
+      })
       setUsername('')
       setPassword('')
+      navigate('/')
     } catch (err) {
       console.error(err)
     }
@@ -36,13 +40,13 @@ function LoginPage() {
 
   return (
     <div className='flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-bl from-indigo-800 from-40% to-blue-950'>
-      <h1 className='mb-16 text-center text-4xl font-bold text-white'>
+      <h1 className='mb-6 text-center text-4xl font-bold text-white'>
         صفحة الدخول
       </h1>
       <div className='flex justify-center'>
         <form
           onSubmit={handleLogin}
-          className='flex h-28 w-4/5 flex-col items-center justify-between'
+          className='flex h-32 w-4/5 flex-col items-center justify-between'
         >
           <input
             className='w-full border-none p-1 px-2 outline-none focus:outline-none'
@@ -64,9 +68,9 @@ function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Button
-            text='Login'
+            text='تسجيل دخول'
             type='submit'
-            className='w-1/2 rounded bg-green-600 p-1 text-white'
+            className='w-1/2 mt-4 rounded bg-green-600 p-1 text-white'
           />
         </form>
       </div>
