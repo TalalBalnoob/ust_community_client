@@ -39,7 +39,10 @@ function PostFeed() {
   return (
     <>
       {posts.map((post) => (
-        <Post />
+        <Post
+          post={post}
+          key={post.id}
+        />
       ))}
     </>
   )
