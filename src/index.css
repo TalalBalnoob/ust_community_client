@@ -3,32 +3,26 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'NotoNaskhArabic';
+  font-family: 'Roboto';
   font-weight: 400;
-  src: url('assets/fonts/Noto_Naskh_Arabic/static/NotoNaskhArabic-Medium.ttf');
+  src: url('assets/fonts/Roboto/Roboto-Medium.ttf');
 }
 
 @font-face {
-  font-family: 'NotoNaskhArabic';
+  font-family: 'Roboto';
   font-weight: 700;
-  src: url('assets/fonts/Noto_Naskh_Arabic/static/NotoNaskhArabic-Bold.ttf');
+  src: url('assets/fonts/Roboto/Roboto-Bold.ttf');
 }
 
 @font-face {
-  font-family: 'NotoNaskhArabic';
+  font-family: 'Roboto';
   font-weight: 300;
-  src: url('assets/fonts/Noto_Naskh_Arabic/static/NotoNaskhArabic-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'NotoNaskhArabic';
-  font-weight: 600;
-  src: url('assets/fonts/Noto_Naskh_Arabic/static/NotoNaskhArabic-SemiBold.ttf');
+  src: url('assets/fonts/Roboto/Roboto-Regular.ttf');
 }
 
 body {
   font-family:
-    'NotoNaskhArabic',
+    'Roboto',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -41,4 +35,5 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-weight: 400;
+  @apply bg-zinc-900 text-zinc-200;
 }

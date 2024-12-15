@@ -37,17 +37,17 @@ function LoginPage() {
   }
 
   return (
-    <div className='flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-bl from-indigo-800 from-40% to-blue-950'>
+    <div className='flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-bl'>
       <h1 className='mb-6 text-center text-4xl font-bold text-white'>
         صفحة الدخول
       </h1>
       <div className='flex justify-center'>
         <form
           onSubmit={handleLogin}
-          className='flex w-4/5 flex-col items-center justify-between'
+          className='flex flex-col items-center justify-between'
         >
           <input
-            className='w-full border-none p-1 px-2  focus:outline-none'
+            className='w-full p-1 px-2 focus:outline-none bg-zinc-800 border border-gray-200/10'
             type='text'
             name='username'
             id='username'
@@ -61,7 +61,7 @@ function LoginPage() {
             required
           />
           <input
-            className='w-full border-none p-1 px-2 focus:outline-none'
+            className='w-full p-1 px-2 focus:outline-none bg-zinc-800 border border-gray-200/10'
             type='password'
             name='password'
             id='password'

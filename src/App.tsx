@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import useAuth from './context/AuthProvider'
-import HomePage from './pages'
-import LoginPage from './pages/login'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
