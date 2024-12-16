@@ -37,6 +37,7 @@ import { useState } from 'react'
 
 export default function useAuth() {
   const getToken = () => {
+    // TODO: add a check request to check if token still valid
     const tokenString = localStorage.getItem('auth')
     const userToken = JSON.parse(tokenString as string)
     return userToken
