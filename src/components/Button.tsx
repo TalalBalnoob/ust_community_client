@@ -1,6 +1,8 @@
+import { ReactNode } from 'react'
+
 type propsType = {
   className: string
-  text: string
+  text: string | ReactNode
   type: 'button' | 'reset' | 'submit'
   onClick?: () => void
 }
