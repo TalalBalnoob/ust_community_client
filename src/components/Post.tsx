@@ -1,18 +1,46 @@
-import {
-  faComment,
-  faHeart as outlineHeart,
-} from '@fortawesome/free-regular-svg-icons'
-import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'
+import { faComment } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useState } from 'react'
 import Avatar from 'react-avatar'
+import useAuth from '../context/AuthProvider'
 import { post } from '../types'
+import axios from '../utils/api/axios'
 import { timeAgo } from '../utils/date'
+import LikeBtn from './LikeBtn'
 
 /* -------------------- Tasks -------------------------------- */
 // TODO: add title to the post
 // TODO: add language detect lib to set the text alignment
 /* -------------------- Tasks -------------------------------- */
 function Post({ post }: { post: post }) {
+  const [, setDummy] = useState(true)
+  const { auth } = useAuth()
+  async function handleLikeToggle() {
+    if (!post.isLiked) {
+      const { status } = await axios.put(
+        `/like/${post.id}`,
+        {},
+        { headers: { Authorization: `Bearer ${auth.token}` } },
+      )
+
+      if (status === 200) {
+        post.isLiked = true
+        post.likes++
+        setDummy((v) => !v)
+      }
+    } else if (post.isLiked) {
+      const { status } = await axios.delete(`/unlike/${post.id}`, {
+        headers: { Authorization: `Bearer ${auth.token}` },
+      })
+
+      if (status === 200) {
+        post.isLiked = false
+        post.likes--
+        post = post
+        setDummy((v) => !v)
+      }
+    }
+  }
   return (
     <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
       {/* User top info */}
@@ -58,20 +86,11 @@ function Post({ post }: { post: post }) {
       <div className=' flex justify-around mt-1'>
         {/* Like btn */}
         {/* TODO: make like btn work */}
-        <button className='flex items-center gap-1 '>
-          {post.isLiked ? (
-            <FontAwesomeIcon
-              icon={solidHeart}
-              className='text-red-500'
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon={outlineHeart}
-              className='text-zinc-400'
-            />
-          )}
-          <p className='text-sm'> {post.likes}</p>
-        </button>
+        <LikeBtn
+          likes={post.likes}
+          isLiked={post.isLiked}
+          onClick={handleLikeToggle}
+        />
         {/* Like btn */}
         {/* TODO: make like btn work */}
         <button className='flex items-center gap-1 '>
