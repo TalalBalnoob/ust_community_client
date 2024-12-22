@@ -9,6 +9,7 @@ type propsType = {
 }
 
 function LikeBtn({ isLiked, likes, onClick }: propsType) {
+  // TODO: add optimistic update
   return (
     <button
       className='flex items-center gap-1'
