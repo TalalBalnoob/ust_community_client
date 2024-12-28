@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button, Comment, LikeBtn } from '../components'
+import { Button, Comment, LikeBtn, PrivateComponent } from '../components'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
 import axios from '../utils/api/axios'
@@ -74,6 +74,20 @@ function ShowPostPage() {
         post.likes--
         setDummy((v) => !v)
       }
+    }
+  }
+
+  async function handleDeletePost() {
+    const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
+    if (!confirmation) return 0
+
+    const res = await axios.delete(`/posts/${postID}`, {
+      headers: { Authorization: `Bearer ${auth.token}` },
+    })
+
+    if (res.status === 200) {
+      triggerRerender()
+      return navigate('..')
     }
   }
 
@@ -167,12 +181,20 @@ function ShowPostPage() {
                   className='text-zinc-400'
                 />
               </button>
-              <button className='flex items-center gap-1 '>
-                <FontAwesomeIcon
-                  icon={faTrashCan}
-                  className='text-zinc-400'
-                />
-              </button>
+              <PrivateComponent
+                ownerId={post.user_id}
+                component={
+                  <button
+                    className='flex items-center gap-1'
+                    onClick={handleDeletePost}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrashCan}
+                      className='text-zinc-400'
+                    />
+                  </button>
+                }
+              />
             </div>
           </div>
         </main>
