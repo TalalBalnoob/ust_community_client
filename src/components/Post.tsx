@@ -9,6 +9,7 @@ import Avatar from 'react-avatar'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
+import axios from '../utils/api/axios'
 import { likePost, unlikePost } from '../utils/api/fetchMethods'
 import { timeAgo } from '../utils/date'
 import LikeBtn from './LikeBtn'
@@ -18,7 +19,13 @@ import PrivateComponent from './PrivateComponent'
 // TODO: add title to the post
 // TODO: add language detect lib to set the text alignment
 /* -------------------- Tasks -------------------------------- */
-function Post({ post }: { post: post }) {
+function Post({
+  post,
+  triggerRerender,
+}: {
+  post: post
+  triggerRerender: () => void
+}) {
   const [, setDummy] = useState(true)
   const { auth } = useAuth()
   const navigate = useNavigate()
@@ -40,6 +47,19 @@ function Post({ post }: { post: post }) {
         post = post
         setDummy((v) => !v)
       }
+    }
+  }
+
+  async function handleDeletePost() {
+    const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
+    if (!confirmation) return 0
+
+    const res = await axios.delete(`/posts/${post.id}`, {
+      headers: { Authorization: `Bearer ${auth.token}` },
+    })
+
+    if (res.status === 200) {
+      triggerRerender()
     }
   }
   return (
@@ -109,7 +129,10 @@ function Post({ post }: { post: post }) {
         <PrivateComponent
           ownerId={post.user_id}
           component={
-            <button className='flex items-center gap-1 '>
+            <button
+              className='flex items-center gap-1 '
+              onClick={handleDeletePost}
+            >
               <FontAwesomeIcon
                 icon={faTrashCan}
                 className='text-zinc-400'

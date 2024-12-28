@@ -6,6 +6,7 @@ import Post from './Post'
 
 function PostFeed() {
   const [posts, setPosts] = useState<post[]>([])
+  const [dummy, setDummy] = useState(true)
   const [page, setPage] = useState<number>(1)
 
   const { auth } = useAuth()
@@ -22,7 +23,7 @@ function PostFeed() {
     }
 
     fetchPosts()
-  }, [page])
+  }, [page, dummy])
 
   useEffect(() => {
     const handelScroll = (e: any) => {
@@ -36,12 +37,17 @@ function PostFeed() {
     return () => window.removeEventListener('scroll', handelScroll)
   }, [page])
 
+  const triggerRerender = () => {
+    setDummy((v) => !v)
+  }
+
   return (
     <>
       {posts.map((post) => (
         <Post
           post={post}
           key={post.id}
+          triggerRerender={triggerRerender}
         />
       ))}
     </>
