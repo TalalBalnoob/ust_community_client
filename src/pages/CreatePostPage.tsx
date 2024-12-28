@@ -1,5 +1,7 @@
+import { faEraser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../components'
 import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
@@ -34,7 +36,25 @@ function CreatePostPage() {
 
   return (
     <div className='text-right'>
-      <h1 className='text-4xl text-center mt-2'>انشاء منشور جديد</h1>
+      <nav className='bg-transparent h-14 text-3xl mr-auto flex justify-between items-center'>
+        <div className='w-10'></div>
+        <h1 className='text-4xl text-center mt-2'>منشور جديد</h1>
+        <NavLink
+          to='..'
+          end
+        >
+          <Button
+            className='text-sm px-2 mx-2 py-1 rounded-sm bg-transparent'
+            text={
+              <FontAwesomeIcon
+                icon={faEraser}
+                size='xl'
+              />
+            }
+            type='button'
+          />
+        </NavLink>
+      </nav>
       <form
         className='flex gap-4 flex-col w-3/4 mx-auto mt-4 justify-center items-center'
         onSubmit={handlePostSubmit}

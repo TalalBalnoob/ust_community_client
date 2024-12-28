@@ -1,12 +1,18 @@
-import { faComment } from '@fortawesome/free-regular-svg-icons'
+import {
+  faComment,
+  faShareSquare,
+  faTrashCan,
+} from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import Avatar from 'react-avatar'
+import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
-import axios from '../utils/api/axios'
+import { likePost, unlikePost } from '../utils/api/fetchMethods'
 import { timeAgo } from '../utils/date'
 import LikeBtn from './LikeBtn'
+import PrivateComponent from './PrivateComponent'
 
 /* -------------------- Tasks -------------------------------- */
 // TODO: add title to the post
@@ -15,13 +21,10 @@ import LikeBtn from './LikeBtn'
 function Post({ post }: { post: post }) {
   const [, setDummy] = useState(true)
   const { auth } = useAuth()
+  const navigate = useNavigate()
   async function handleLikeToggle() {
     if (!post.isLiked) {
-      const { status } = await axios.put(
-        `/like/${post.id}`,
-        {},
-        { headers: { Authorization: `Bearer ${auth.token}` } },
-      )
+      const { status } = await likePost(post.id, auth)
 
       if (status === 200) {
         post.isLiked = true
@@ -29,9 +32,7 @@ function Post({ post }: { post: post }) {
         setDummy((v) => !v)
       }
     } else if (post.isLiked) {
-      const { status } = await axios.delete(`/unlike/${post.id}`, {
-        headers: { Authorization: `Bearer ${auth.token}` },
-      })
+      const { status } = await unlikePost(post.id, auth)
 
       if (status === 200) {
         post.isLiked = false
@@ -66,7 +67,10 @@ function Post({ post }: { post: post }) {
         </div>
       </div>
       {/* Post Body */}
-      <div className='mt-1'>
+      <div
+        className='mt-1'
+        onClick={() => navigate(`/posts/${post.id}`)}
+      >
         <div className=' my-2'>
           <p className='text-left	leading-7'>{post.body}</p>
         </div>
@@ -84,15 +88,11 @@ function Post({ post }: { post: post }) {
       </div>
       {/* Post interactions */}
       <div className=' flex justify-around mt-1'>
-        {/* Like btn */}
-        {/* TODO: make like btn work */}
         <LikeBtn
           likes={post.likes}
           isLiked={post.isLiked}
           onClick={handleLikeToggle}
         />
-        {/* Like btn */}
-        {/* TODO: make like btn work */}
         <button className='flex items-center gap-1 '>
           <FontAwesomeIcon
             icon={faComment}
@@ -100,6 +100,23 @@ function Post({ post }: { post: post }) {
           />
           <p className='text-sm'>{post.comments.length}</p>
         </button>
+        <button className='flex items-center gap-1 '>
+          <FontAwesomeIcon
+            icon={faShareSquare}
+            className='text-zinc-400'
+          />
+        </button>
+        <PrivateComponent
+          ownerId={post.user_id}
+          component={
+            <button className='flex items-center gap-1 '>
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                className='text-zinc-400'
+              />
+            </button>
+          }
+        />
       </div>
     </div>
   )

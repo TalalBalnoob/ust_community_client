@@ -1,8 +1,8 @@
 export interface getPostsType {
-  posts: data
+  posts: dataPage
 }
 
-interface data {
+interface dataPage {
   current_page: number
   data: post[]
   first_page_url: string
@@ -38,7 +38,7 @@ export interface post {
   comments: Comment[]
 }
 
-interface Comment {
+export interface comment {
   id: number
   user_id: number
   post_id: number

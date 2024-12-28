@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useAuth from '../context/AuthProvider'
-import { getPostsType, post } from '../types'
-import axios from '../utils/api/axios'
+import { post } from '../types'
+import { fetchAllPosts } from '../utils/api/fetchMethods'
 import Post from './Post'
 
 function PostFeed() {
@@ -11,17 +11,17 @@ function PostFeed() {
   const { auth } = useAuth()
 
   useEffect(() => {
-    axios
-      .get<getPostsType>(`/posts?page=${page}`, {
-        withCredentials: true,
-        headers: { Authorization: `Bearer ${auth.token}` },
-      })
-      .then((res) => {
-        setPosts([...posts, ...res.data.posts.data])
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+    const fetchPosts = async () => {
+      try {
+        console.log(1)
+        const res = await fetchAllPosts(auth, page)
+        setPosts(res.posts.data)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    fetchPosts()
   }, [page])
 
   useEffect(() => {

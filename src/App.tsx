@@ -3,6 +3,7 @@ import useAuth from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
+import ShowPostPage from './pages/ShowPostPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
@@ -17,6 +18,10 @@ function App() {
         <Route
           element={<CreatePostPage />}
           path='/create'
+        />
+        <Route
+          element={<ShowPostPage />}
+          path='/posts/:postID'
         />
       </Route>
       <Route
