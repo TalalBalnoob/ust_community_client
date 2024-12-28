@@ -14,9 +14,8 @@ function PostFeed() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        console.log(1)
         const res = await fetchAllPosts(auth, page)
-        setPosts(res.posts.data)
+        setPosts((posts) => [...posts, ...res.posts.data])
       } catch (e) {
         console.error(e)
       }
