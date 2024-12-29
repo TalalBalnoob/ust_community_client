@@ -16,17 +16,10 @@ export const fetchAllPosts = async (
   return res.data
 }
 
-export const fetchOnePost = async (
-  postID: number,
-  auth: AuthData,
-): Promise<post> => {
-  const res = await axios.get<{ data: post }>(`/posts/${postID}`, {
+export const fetchOnePost = async (postID: number, auth: AuthData) => {
+  return await axios.get<{ data: post }>(`/posts/${postID}`, {
     headers: { Authorization: `Bearer ${auth.token}` },
   })
-
-  if (res.status !== 200) throw Error('something went wrong')
-
-  return res.data.data
 }
 
 export const likePost = async (postId: number, auth: AuthData) => {

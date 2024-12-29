@@ -27,11 +27,10 @@ function ShowPostPage() {
   useEffect(() => {
     const fetchMethod = async () => {
       try {
-        const data: post = await fetchOnePost(Number(postID), auth)
-
-        setPost(() => data)
-      } catch (e) {
-        console.log(e)
+        const res = await fetchOnePost(Number(postID), auth)
+        setPost(() => res.data.data)
+      } catch {
+        throw Error('Not Found')
       }
     }
 
