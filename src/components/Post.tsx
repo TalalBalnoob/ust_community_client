@@ -1,17 +1,14 @@
-import {
-  faComment,
-  faShareSquare,
-  faTrashCan,
-} from '@fortawesome/free-regular-svg-icons'
+import { faComment, faShareSquare } from '@fortawesome/free-regular-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
-import axios from '../utils/api/axios'
 import { likePost, unlikePost } from '../utils/api/fetchMethods'
 import { timeAgo } from '../utils/date'
+import useLanguageDetection from '../utils/lang/LanguageDetector'
 import LikeBtn from './LikeBtn'
 import PrivateComponent from './PrivateComponent'
 
@@ -19,15 +16,10 @@ import PrivateComponent from './PrivateComponent'
 // TODO: add title to the post
 // TODO: add language detect lib to set the text alignment
 /* -------------------- Tasks -------------------------------- */
-function Post({
-  post,
-  triggerRerender,
-}: {
-  post: post
-  triggerRerender: () => void
-}) {
+function Post({ post }: { post: post; triggerRerender: () => void }) {
   const [, setDummy] = useState(true)
   const { auth } = useAuth()
+  const { detectedLanguage, detectLanguage } = useLanguageDetection()
   const navigate = useNavigate()
   async function handleLikeToggle() {
     if (!post.isLiked) {
@@ -50,23 +42,15 @@ function Post({
     }
   }
 
-  async function handleDeletePost() {
-    const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
-    if (!confirmation) return 0
+  useEffect(() => {
+    detectLanguage(post.body)
+  }, [])
 
-    const res = await axios.delete(`/posts/${post.id}`, {
-      headers: { Authorization: `Bearer ${auth.token}` },
-    })
-
-    if (res.status === 200) {
-      triggerRerender()
-    }
-  }
   return (
     <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
       {/* User top info */}
       <div
-        className='flex items-start w-fit gap-2'
+        className='flex items-start w-fit gap-2 cursor-default'
         onClick={() => {
           navigate(`/users/${post.user_id}`)
         }}
@@ -97,7 +81,12 @@ function Post({
         onClick={() => navigate(`/posts/${post.id}`)}
       >
         <div className=' my-2'>
-          <p className='text-left	leading-7'>{post.body}</p>
+          <p
+            className='text-left	leading-7'
+            style={{ textAlign: detectedLanguage === 'arb' ? 'right' : 'left' }}
+          >
+            {post.body}
+          </p>
         </div>
         <div>
           {post.attachment_url ? (
@@ -139,10 +128,10 @@ function Post({
           component={
             <button
               className='flex items-center gap-1 '
-              onClick={handleDeletePost}
+              onClick={() => navigate(`/posts/${post.id}/edit`)}
             >
               <FontAwesomeIcon
-                icon={faTrashCan}
+                icon={faPen}
                 className='text-zinc-400'
               />
             </button>
