@@ -1,8 +1,8 @@
 import { faComment } from '@fortawesome/free-regular-svg-icons'
 import {
   faHouse,
+  faPen,
   faShareSquare,
-  faTrashCan,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
@@ -73,20 +73,6 @@ function ShowPostPage() {
         post.likes--
         setDummy((v) => !v)
       }
-    }
-  }
-
-  async function handleDeletePost() {
-    const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
-    if (!confirmation) return 0
-
-    const res = await axios.delete(`/posts/${postID}`, {
-      headers: { Authorization: `Bearer ${auth.token}` },
-    })
-
-    if (res.status === 200) {
-      triggerRerender()
-      return navigate('..')
     }
   }
 
@@ -185,10 +171,10 @@ function ShowPostPage() {
                 component={
                   <button
                     className='flex items-center gap-1'
-                    onClick={handleDeletePost}
+                    onClick={() => navigate(`/posts/${postID}/edit`)}
                   >
                     <FontAwesomeIcon
-                      icon={faTrashCan}
+                      icon={faPen}
                       className='text-zinc-400'
                     />
                   </button>

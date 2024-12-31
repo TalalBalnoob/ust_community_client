@@ -1,15 +1,11 @@
-import {
-  faComment,
-  faShareSquare,
-  faTrashCan,
-} from '@fortawesome/free-regular-svg-icons'
+import { faComment, faShareSquare } from '@fortawesome/free-regular-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import Avatar from 'react-avatar'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
-import axios from '../utils/api/axios'
 import { likePost, unlikePost } from '../utils/api/fetchMethods'
 import { timeAgo } from '../utils/date'
 import LikeBtn from './LikeBtn'
@@ -50,23 +46,11 @@ function Post({
     }
   }
 
-  async function handleDeletePost() {
-    const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
-    if (!confirmation) return 0
-
-    const res = await axios.delete(`/posts/${post.id}`, {
-      headers: { Authorization: `Bearer ${auth.token}` },
-    })
-
-    if (res.status === 200) {
-      triggerRerender()
-    }
-  }
   return (
     <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
       {/* User top info */}
       <div
-        className='flex items-start w-fit gap-2'
+        className='flex items-start w-fit gap-2 cursor-default'
         onClick={() => {
           navigate(`/users/${post.user_id}`)
         }}
@@ -139,10 +123,10 @@ function Post({
           component={
             <button
               className='flex items-center gap-1 '
-              onClick={handleDeletePost}
+              onClick={() => navigate(`/posts/${post.id}/edit`)}
             >
               <FontAwesomeIcon
-                icon={faTrashCan}
+                icon={faPen}
                 className='text-zinc-400'
               />
             </button>

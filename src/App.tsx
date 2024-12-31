@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 import useAuth from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
+import EditPostPage from './pages/EditPostPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import ShowPostPage from './pages/ShowPostPage'
@@ -17,11 +18,8 @@ function App() {
   const { auth } = useAuth()
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
-        <Route
-          element={<PrivateRoutes />}
-          errorElement={<NotFoundPage />}
-        >
+      <Route errorElement={<NotFoundPage />}>
+        <Route element={<PrivateRoutes />}>
           <Route
             element={<HomePage />}
             path='/'
@@ -33,7 +31,10 @@ function App() {
           <Route
             element={<ShowPostPage />}
             path='/posts/:postID'
-            errorElement={<NotFoundPage />}
+          />
+          <Route
+            element={<EditPostPage />}
+            path='/posts/:postID/edit'
           />
         </Route>
         <Route
