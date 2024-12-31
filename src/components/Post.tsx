@@ -65,7 +65,12 @@ function Post({
   return (
     <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
       {/* User top info */}
-      <div className='flex items-start gap-2'>
+      <div
+        className='flex items-start w-fit gap-2'
+        onClick={() => {
+          navigate(`/users/${post.user_id}`)
+        }}
+      >
         {/* User Image */}
         {post.user.imageUrl ? (
           <img
@@ -113,7 +118,10 @@ function Post({
           isLiked={post.isLiked}
           onClick={handleLikeToggle}
         />
-        <button className='flex items-center gap-1 '>
+        <button
+          className='flex items-center gap-1 '
+          onClick={() => navigate(`/posts/${post.id}`)}
+        >
           <FontAwesomeIcon
             icon={faComment}
             className='text-zinc-400'
