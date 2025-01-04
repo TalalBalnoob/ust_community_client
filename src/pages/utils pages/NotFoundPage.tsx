@@ -1,10 +1,9 @@
 import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate, useRouteError } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components'
 
 function NotFoundPage() {
-  const error: any = useRouteError()
   const navigate = useNavigate()
   return (
     <div className='w-screen h-screen'>
@@ -25,7 +24,7 @@ function NotFoundPage() {
         />
       </nav>
       <h1 className='flex flex-col justify-center items-center h-1/2 w-full'>
-        Page Not Found :(
+        Page Not Found 😢
       </h1>
     </div>
   )
