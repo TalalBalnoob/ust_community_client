@@ -1,4 +1,4 @@
-import { faEraser } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
 import {
@@ -67,7 +67,7 @@ function EditPostPage() {
             className='text-sm px-2 mx-2 py-1 rounded-sm bg-transparent'
             text={
               <FontAwesomeIcon
-                icon={faEraser}
+                icon={faHome}
                 size='xl'
               />
             }

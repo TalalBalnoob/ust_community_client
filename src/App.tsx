@@ -15,7 +15,7 @@ function App() {
       element: auth ? <Navigate to={'/'} /> : <LoginPage />,
     },
     {
-      // errorElement: <NotFoundPage />,
+      errorElement: <NotFoundPage />,
       children: [
         {
           path: '/',
@@ -34,7 +34,7 @@ function App() {
         {
           path: '/posts/:postID/edit',
           element: <EditPostPage />,
-          // errorElement: <NotFoundPage />,
+          errorElement: <NotFoundPage />,
           loader: editPostLoader,
         },
       ],
