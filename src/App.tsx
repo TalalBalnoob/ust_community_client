@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import useAuth from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
-import EditPostPage from './pages/EditPostPage'
+import EditPostPage, { editPostLoader } from './pages/EditPostPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import ShowPostPage, { postLoader } from './pages/ShowPostPage'
@@ -15,7 +15,7 @@ function App() {
       element: auth ? <Navigate to={'/'} /> : <LoginPage />,
     },
     {
-      errorElement: <NotFoundPage />,
+      // errorElement: <NotFoundPage />,
       children: [
         {
           path: '/',
@@ -34,6 +34,8 @@ function App() {
         {
           path: '/posts/:postID/edit',
           element: <EditPostPage />,
+          // errorElement: <NotFoundPage />,
+          loader: editPostLoader,
         },
       ],
     },

@@ -14,7 +14,7 @@ import {
   useParams,
 } from 'react-router-dom'
 import { Button, Comment, LikeBtn, PrivateComponent } from '../components'
-import useAuth from '../context/AuthProvider'
+import useAuth, { getAuth } from '../context/AuthProvider'
 import { post } from '../types'
 import axios from '../utils/api/axios'
 import { fetchOnePost, likePost, unlikePost } from '../utils/api/fetchMethods'
@@ -219,9 +219,7 @@ export const postLoader = async ({
   params,
 }: LoaderFunctionArgs): Promise<post> => {
   const { postID } = params
-  const { auth } = useAuth()
-
-  console.log(postID)
+  const auth = getAuth()
 
   const res = await fetchOnePost(Number(postID), auth)
 

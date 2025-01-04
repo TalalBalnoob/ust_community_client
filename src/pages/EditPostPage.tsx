@@ -1,26 +1,30 @@
 import { faEraser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import {
+  LoaderFunctionArgs,
+  NavLink,
+  useLoaderData,
+  useNavigate,
+  useParams,
+} from 'react-router-dom'
 import { Button } from '../components'
-import useAuth from '../context/AuthProvider'
+import useAuth, { getAuth } from '../context/AuthProvider'
+import { post } from '../types'
 import axios from '../utils/api/axios'
 import { fetchOnePost } from '../utils/api/fetchMethods'
 
 function EditPostPage() {
+  const post = useLoaderData() as post
   const { auth } = useAuth()
   const navigate = useNavigate()
   let { postID } = useParams()
   const [title, setTitle] = useState<string>('')
   const [body, setBody] = useState<string>('')
-  useEffect(() => {
-    const fetchPost = async () => {
-      const { data } = await fetchOnePost(Number(postID), auth)
-      setTitle(() => data.data.title ?? '')
-      setBody(() => data.data.body)
-    }
 
-    fetchPost()
+  useEffect(() => {
+    setTitle(() => post.title ?? '')
+    setBody(() => post.body)
   }, [])
 
   const handlePostSubmit = async (e: FormEvent) => {
@@ -90,7 +94,11 @@ function EditPostPage() {
             placeholder='العنوان'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='block text-right w-full rounded bg-zinc-800 px-3 py-1.5 text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='block text-right w-full rounded bg-zinc-800 px-3 py-1.5
+						 					 text-base text-zinc-200 outline outline-1 -outline-offset-1
+						 				 outline-zinc-700 placeholder:text-gray-400 focus:outline
+							 				 focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500
+										   sm:text-sm/6'
           />
         </label>
         <label
@@ -105,7 +113,10 @@ function EditPostPage() {
             required
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className='block w-full text-right rounded bg-zinc-800 px-3 py-1.5 text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='block w-full text-right rounded bg-zinc-800 px-3 py-1.5
+											 text-base text-zinc-200 outline outline-1 -outline-offset-1
+										 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 
+										 	 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
           />
         </label>
         <Button
@@ -125,3 +136,14 @@ function EditPostPage() {
 }
 
 export default EditPostPage
+
+export const editPostLoader = async ({
+  params,
+}: LoaderFunctionArgs): Promise<post> => {
+  const { postID } = params
+  const auth = getAuth()
+
+  const { data } = await fetchOnePost(Number(postID), auth)
+
+  return data.data
+}
