@@ -23,7 +23,7 @@ import { timeAgo } from '../utils/date'
 function ShowPostPage() {
   const post = useLoaderData() as post
   const navigate = useNavigate()
-  const [dummy, setDummy] = useState(true)
+  const [, setDummy] = useState(true)
   const [commentBody, setCommentBody] = useState<string>('')
   let { postID } = useParams()
 
