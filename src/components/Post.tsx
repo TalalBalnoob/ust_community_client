@@ -3,7 +3,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types'
 import { likePost, unlikePost } from '../utils/api/fetchMethods'
@@ -14,7 +14,6 @@ import PrivateComponent from './PrivateComponent'
 
 /* -------------------- Tasks -------------------------------- */
 // TODO: add title to the post
-// TODO: add language detect lib to set the text alignment
 /* -------------------- Tasks -------------------------------- */
 function Post({ post }: { post: post; triggerRerender: () => void }) {
   const [, setDummy] = useState(true)
@@ -46,6 +45,10 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
     detectLanguage(post.body)
   }, [])
 
+  const handleNavigation = () => {
+    navigate('/posts/1', { replace: false })
+  }
+
   return (
     <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
       {/* User top info */}
@@ -76,30 +79,35 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
         </div>
       </div>
       {/* Post Body */}
-      <div
-        className='mt-1'
-        onClick={() => navigate(`/posts/${post.id}`)}
+      <Link
+        to={`/posts/${post.id}`}
+        reloadDocument
       >
-        <div className=' my-2'>
-          <p
-            className='text-left	leading-7'
-            style={{ textAlign: detectedLanguage === 'arb' ? 'right' : 'left' }}
-          >
-            {post.body}
-          </p>
+        <div className='mt-1'>
+          <div className=' my-2'>
+            <p
+              className='text-left	leading-7'
+              style={{
+                textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
+              }}
+            >
+              {post.body}
+            </p>
+          </div>
+          <div>
+            {post.attachment_url ? (
+              <img
+                className='rounded'
+                src={`${import.meta.env.VITE_BASE_URL}/storage/${post.attachment_url}`}
+                alt=''
+              />
+            ) : (
+              ''
+            )}
+          </div>
         </div>
-        <div>
-          {post.attachment_url ? (
-            <img
-              className='rounded'
-              src={`${import.meta.env.VITE_BASE_URL}/storage/${post.attachment_url}`}
-              alt=''
-            />
-          ) : (
-            ''
-          )}
-        </div>
-      </div>
+      </Link>
+
       {/* Post interactions */}
       <div className=' flex justify-around mt-1'>
         <LikeBtn

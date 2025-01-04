@@ -14,7 +14,6 @@ const useLanguageDetection = (): UseLanguageDetectionResult => {
   const detectLanguage = (text: string): void => {
     try {
       const langCode = francAll(text, { only: ['eng', 'arb'], minLength: 5 })
-      console.log(langCode[0][0])
 
       if (langCode[0][0] === 'und') {
         setDetectedLanguage('Unknown language')

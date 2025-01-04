@@ -1,5 +1,5 @@
 import { AuthData } from '../../context/AuthProvider'
-import { getPostsType, post } from '../../types'
+import { getPostsType, post, userProfile } from '../../types'
 import axios from './axios'
 
 export const fetchAllPosts = async (
@@ -32,6 +32,12 @@ export const likePost = async (postId: number, auth: AuthData) => {
 
 export const unlikePost = async (postId: number, auth: AuthData) => {
   return await axios.delete(`/unlike/${postId}`, {
+    headers: { Authorization: `Bearer ${auth.token}` },
+  })
+}
+
+export const fetchUserProfile = async (userId: string, auth: AuthData) => {
+  return await axios.get<userProfile>(`/user/profile/${userId}`, {
     headers: { Authorization: `Bearer ${auth.token}` },
   })
 }

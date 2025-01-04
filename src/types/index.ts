@@ -35,7 +35,7 @@ export interface post {
   isLiked: boolean
   likes: number
   user: student | staff
-  comments: Comment[]
+  comments: comment[]
 }
 
 export interface comment {
@@ -49,7 +49,7 @@ export interface comment {
   user: student | staff
 }
 
-interface student {
+export interface student {
   id: number
   user_id: number
   displayName: string
@@ -61,7 +61,7 @@ interface student {
   updated_at: string
 }
 
-interface staff {
+export interface staff {
   id: number
   user_id: number
   displayName: string
@@ -73,4 +73,18 @@ interface staff {
   created_at: string
   updated_at: string
   role_id: number
+}
+
+export interface userProfile {
+  id: number
+  username: number
+  isAdmin: boolean
+  user_type_id: number
+  created_at: string
+  updated_at: string
+  following: number
+  followers: number
+  profile: student | staff
+  posts: post[]
+  comments: comment[]
 }
