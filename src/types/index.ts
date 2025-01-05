@@ -49,7 +49,7 @@ export interface comment {
   user: student | staff
 }
 
-export interface student {
+export interface staff {
   id: number
   user_id: number
   displayName: string
@@ -59,15 +59,17 @@ export interface student {
   imageUrl: null
   created_at: string
   updated_at: string
+  role: string
 }
 
-export interface staff {
+export interface student {
   id: number
   user_id: number
   displayName: string
   major_id: number
   level: number
   branch: string
+  major: string
   bio: null
   imageUrl: null
   created_at: string
@@ -75,7 +77,7 @@ export interface staff {
   role_id: number
 }
 
-export interface userProfile {
+export interface userProfile<t = student> {
   id: number
   username: number
   isAdmin: boolean
@@ -84,7 +86,7 @@ export interface userProfile {
   updated_at: string
   following: number
   followers: number
-  profile: student | staff
+  profile: t
   posts: post[]
   comments: comment[]
 }

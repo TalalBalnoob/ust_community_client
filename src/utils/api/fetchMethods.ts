@@ -37,7 +37,7 @@ export const unlikePost = async (postId: number, auth: AuthData) => {
 }
 
 export const fetchUserProfile = async (userId: string, auth: AuthData) => {
-  return await axios.get<userProfile>(`/user/profile/${userId}`, {
+  return await axios.get<{ user: userProfile }>(`/user/profile/${userId}`, {
     headers: { Authorization: `Bearer ${auth.token}` },
   })
 }

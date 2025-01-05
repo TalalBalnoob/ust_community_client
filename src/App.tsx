@@ -5,6 +5,7 @@ import EditPostPage, { editPostLoader } from './pages/EditPostPage'
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import ShowPostPage, { postLoader } from './pages/ShowPostPage'
+import UserProfilePage, { userProfileLoader } from './pages/UserProfilePage'
 import NotFoundPage from './pages/utils pages/NotFoundPage'
 
 function App() {
@@ -36,6 +37,13 @@ function App() {
           element: <EditPostPage />,
           errorElement: <NotFoundPage />,
           loader: editPostLoader,
+        },
+
+        {
+          path: '/users/:userID',
+          element: <UserProfilePage />,
+          errorElement: <NotFoundPage />,
+          loader: userProfileLoader,
         },
       ],
     },
