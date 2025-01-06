@@ -6,13 +6,13 @@ import { Button } from '../../components'
 function NotFoundPage() {
   const navigate = useNavigate()
   return (
-    <div className='w-screen h-screen'>
-      <nav className='bg-transparent h-14 text-3xl mr-auto flex justify-between items-center'>
+    <div className='h-screen w-screen'>
+      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         {/* Filler div to make the layout as |space -- title -- btn| */}
         <div className='w-10'></div>
         <h1>UST-C</h1>
         <Button
-          className='text-sm px-2 mx-2 py-1 rounded-sm bg-transparent'
+          className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
           text={
             <FontAwesomeIcon
               icon={faHouse}
@@ -23,7 +23,7 @@ function NotFoundPage() {
           onClick={() => navigate('/')}
         />
       </nav>
-      <h1 className='flex flex-col justify-center items-center h-1/2 w-full'>
+      <h1 className='flex h-1/2 w-full flex-col items-center justify-center'>
         Page Not Found 😢
       </h1>
     </div>

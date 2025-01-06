@@ -71,12 +71,12 @@ function ShowPostPage() {
   }
 
   return (
-    <div className='w-screen h-screen'>
-      <nav className='bg-transparent h-14 text-3xl mr-auto flex justify-between items-center'>
+    <div className='h-screen w-screen'>
+      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         <div className='w-10'></div>
         <h1>UST-C</h1>
         <Button
-          className='text-sm px-2 mx-2 py-1 rounded-sm bg-transparent'
+          className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
           text={
             <FontAwesomeIcon
               icon={faHouse}
@@ -89,7 +89,7 @@ function ShowPostPage() {
       </nav>
 
       <main>
-        <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
+        <div className='h-fit w-full border-b border-t border-gray-200/10 p-3'>
           {/* User top info */}
           <div className='flex items-start gap-2'>
             {/* User Image */}
@@ -107,17 +107,17 @@ function ShowPostPage() {
               />
             )}
             {/* User name */}
-            <div className='flex gap-2 items-baseline'>
+            <div className='flex items-baseline gap-2'>
               <h4 className='text-white'>{post?.user.displayName}</h4>
-              <p className='text-white/50 text-sm'>
+              <p className='text-sm text-white/50'>
                 {post ? timeAgo(post?.created_at as string) : ''}
               </p>
             </div>
           </div>
           {/* Post Body */}
           <div className='mt-1'>
-            <div className=' my-2'>
-              <p className='text-left	leading-7'>{post?.body}</p>
+            <div className='my-2'>
+              <p className='text-left leading-7'>{post?.body}</p>
             </div>
             <div>
               {post?.attachment_url ? (
@@ -132,7 +132,7 @@ function ShowPostPage() {
             </div>
           </div>
           {/* Post interactions */}
-          <div className=' flex justify-around mt-1'>
+          <div className='mt-1 flex justify-around'>
             {/* Like btn */}
             <LikeBtn
               likes={post?.likes as number}
@@ -140,14 +140,14 @@ function ShowPostPage() {
               onClick={handleLikeToggle}
             />
             {/* Comment btn */}
-            <button className='flex items-center gap-1 '>
+            <button className='flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faComment}
                 className='text-zinc-400'
               />
               <p className='text-sm'>{post?.comments.length}</p>
             </button>
-            <button className='flex items-center gap-1 '>
+            <button className='flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faShareSquare}
                 className='text-zinc-400'
@@ -180,23 +180,20 @@ function ShowPostPage() {
             name=''
             id=''
             placeholder='اكتب تعليقك هنا'
-            className='w-full text-right rounded bg-zinc-800 px-3 py-1.5 text-base
-						 				 text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700
-						  			 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2
-										 focus:outline-zinc-500 sm:text-sm/6'
+            className='w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
             rows={3}
             required
             onChange={(e) => setCommentBody(e.target.value)}
             value={commentBody}
           ></textarea>
-          <div className='flex justify-between items-center'>
+          <div className='flex items-center justify-between'>
             <button
               type='submit'
-              className='p-2 px-4 m-2 h-fit rounded bg-zinc-600'
+              className='m-2 h-fit rounded bg-zinc-600 p-2 px-4'
             >
               نشر
             </button>
-            <h2 className='text-xl mt-6 mb-3 mx-2 text-right'>
+            <h2 className='mx-2 mb-3 mt-6 text-right text-xl'>
               {post?.comments.length} التعليقات
             </h2>
           </div>

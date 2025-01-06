@@ -35,9 +35,9 @@ function Comment({ comment, parentId, onRerender }: propsType) {
     }
   }
   return (
-    <div className='h-fit w-full p-3 block border-t border-b border-gray-200/10'>
+    <div className='block h-fit w-full border-b border-t border-gray-200/10 p-3'>
       {/* User top info */}
-      <div className='flex items-center w-full gap-2'>
+      <div className='flex w-full items-center gap-2'>
         {/* User Image */}
         {comment.user.imageUrl ? (
           <img
@@ -53,14 +53,14 @@ function Comment({ comment, parentId, onRerender }: propsType) {
           />
         )}
         {/* User name */}
-        <div className='flex gap-2 items-baseline'>
+        <div className='flex items-baseline gap-2'>
           <h4 className='text-white'>{comment.user.displayName}</h4>
-          <p className='text-white/50 text-sm'>{timeAgo(comment.created_at)}</p>
+          <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
         </div>
         <PrivateComponent
           ownerId={comment.user_id}
           component={
-            <button className='ml-auto flex items-center gap-1 '>
+            <button className='ml-auto flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faTrashCan}
                 className='text-zinc-400'
@@ -72,8 +72,8 @@ function Comment({ comment, parentId, onRerender }: propsType) {
       </div>
       {/* comment Body */}
       <div className='mt-1'>
-        <div className=' my-2'>
-          <p className='text-left	leading-7'>{comment.body}</p>
+        <div className='my-2'>
+          <p className='text-left leading-7'>{comment.body}</p>
         </div>
         <div>
           {comment.attachment_url ? (

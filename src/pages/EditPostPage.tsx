@@ -56,15 +56,15 @@ function EditPostPage() {
 
   return (
     <div className='text-right'>
-      <nav className='bg-transparent h-14 text-3xl mr-auto flex justify-between items-center'>
+      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         <div className='w-10'></div>
-        <h1 className='text-4xl text-center mt-2'>تعديل المنشور</h1>
+        <h1 className='mt-2 text-center text-4xl'>تعديل المنشور</h1>
         <NavLink
           to='..'
           end
         >
           <Button
-            className='text-sm px-2 mx-2 py-1 rounded-sm bg-transparent'
+            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
             text={
               <FontAwesomeIcon
                 icon={faHome}
@@ -76,12 +76,12 @@ function EditPostPage() {
         </NavLink>
       </nav>
       <form
-        className='flex gap-4 flex-col w-3/4 mx-auto mt-4 justify-center items-center'
+        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4'
         onSubmit={handlePostSubmit}
       >
         <label
           htmlFor='title'
-          className='text-lg w-full flex flex-col'
+          className='flex w-full flex-col text-lg'
         >
           عنوان المنشور
           <input
@@ -94,16 +94,12 @@ function EditPostPage() {
             placeholder='العنوان'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='block text-right w-full rounded bg-zinc-800 px-3 py-1.5
-						 					 text-base text-zinc-200 outline outline-1 -outline-offset-1
-						 				 outline-zinc-700 placeholder:text-gray-400 focus:outline
-							 				 focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500
-										   sm:text-sm/6'
+            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
           />
         </label>
         <label
           htmlFor='body'
-          className='text-lg flex w-full flex-col'
+          className='flex w-full flex-col text-lg'
         >
           محتوى المنشور
           <textarea
@@ -113,21 +109,18 @@ function EditPostPage() {
             required
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className='block w-full text-right rounded bg-zinc-800 px-3 py-1.5
-											 text-base text-zinc-200 outline outline-1 -outline-offset-1
-										 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 
-										 	 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
           />
         </label>
         <Button
           text='نشر'
           type='submit'
-          className='p-2 px-4 mt-4 w-3/4 rounded bg-zinc-600'
+          className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'
         />
         <Button
           text='حذف المنشور'
           type='button'
-          className='p-2 px-4 mt-4 w-3/4 rounded bg-red-800 focus:bg-red-700'
+          className='mt-4 w-3/4 rounded bg-red-800 p-2 px-4 focus:bg-red-700'
           onClick={handleDeletePost}
         />
       </form>

@@ -50,10 +50,10 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
   }
 
   return (
-    <div className='h-fit w-full p-3 border-t border-b border-gray-200/10'>
+    <div className='h-fit w-full border-b border-t border-gray-200/10 p-3'>
       {/* User top info */}
       <div
-        className='flex items-start w-fit gap-2 cursor-default'
+        className='flex w-fit cursor-default items-start gap-2'
         onClick={() => {
           navigate(`/users/${post.user_id}`)
         }}
@@ -73,9 +73,9 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           />
         )}
         {/* User name */}
-        <div className='flex gap-2 items-baseline'>
+        <div className='flex items-baseline gap-2'>
           <h4 className='text-white'>{post.user.displayName}</h4>
-          <p className='text-white/50 text-sm'>{timeAgo(post.created_at)}</p>
+          <p className='text-sm text-white/50'>{timeAgo(post.created_at)}</p>
         </div>
       </div>
       {/* Post Body */}
@@ -84,9 +84,9 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
         reloadDocument
       >
         <div className='mt-1'>
-          <div className=' my-2'>
+          <div className='my-2'>
             <p
-              className='text-left	leading-7'
+              className='text-left leading-7'
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
               }}
@@ -109,14 +109,14 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       </Link>
 
       {/* Post interactions */}
-      <div className=' flex justify-around mt-1'>
+      <div className='mt-1 flex justify-around'>
         <LikeBtn
           likes={post.likes}
           isLiked={post.isLiked}
           onClick={handleLikeToggle}
         />
         <button
-          className='flex items-center gap-1 '
+          className='flex items-center gap-1'
           onClick={() => navigate(`/posts/${post.id}`)}
         >
           <FontAwesomeIcon
@@ -125,7 +125,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           />
           <p className='text-sm'>{post.comments.length}</p>
         </button>
-        <button className='flex items-center gap-1 '>
+        <button className='flex items-center gap-1'>
           <FontAwesomeIcon
             icon={faShareSquare}
             className='text-zinc-400'
@@ -135,7 +135,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           ownerId={post.user_id}
           component={
             <button
-              className='flex items-center gap-1 '
+              className='flex items-center gap-1'
               onClick={() => navigate(`/posts/${post.id}/edit`)}
             >
               <FontAwesomeIcon

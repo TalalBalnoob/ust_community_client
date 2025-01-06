@@ -47,7 +47,7 @@ function LoginPage() {
           className='flex flex-col items-center justify-between'
         >
           <input
-            className='w-full p-1 px-2 focus:outline-none bg-zinc-800 border border-gray-200/10'
+            className='w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 focus:outline-none'
             type='text'
             name='username'
             id='username'
@@ -61,7 +61,7 @@ function LoginPage() {
             required
           />
           <input
-            className='w-full p-1 px-2 focus:outline-none bg-zinc-800 border border-gray-200/10'
+            className='w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 focus:outline-none'
             type='password'
             name='password'
             id='password'
@@ -73,13 +73,13 @@ function LoginPage() {
             }}
             required
           />
-          <div className='error_block h-2 my-2'>
-            <p className='text-red-600 select-none'>{errorMsg}</p>
+          <div className='error_block my-2 h-2'>
+            <p className='select-none text-red-600'>{errorMsg}</p>
           </div>
           <Button
             text='تسجيل دخول'
             type='submit'
-            className='w-1/2 mt-4 rounded bg-green-600 p-1 text-white'
+            className='mt-4 w-1/2 rounded bg-green-600 p-1 text-white'
           />
         </form>
       </div>
