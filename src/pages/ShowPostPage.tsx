@@ -7,17 +7,12 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
 import Avatar from 'react-avatar'
-import {
-  LoaderFunctionArgs,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from 'react-router-dom'
-import { Button, Comment, LikeBtn, PrivateComponent } from '../components'
-import useAuth, { getAuth } from '../context/AuthProvider'
-import { post } from '../types'
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
+import { Comment, LikeBtn, PrivateComponent } from '../components'
+import useAuth from '../context/AuthProvider'
+import { post } from '../types/posts.type'
 import axios from '../utils/api/axios'
-import { fetchOnePost, likePost, unlikePost } from '../utils/api/fetchMethods'
+import { likePost, unlikePost } from '../utils/api/fetchPosts'
 import { timeAgo } from '../utils/date'
 
 function ShowPostPage() {
@@ -25,7 +20,7 @@ function ShowPostPage() {
   const navigate = useNavigate()
   const [, setDummy] = useState(true)
   const [commentBody, setCommentBody] = useState<string>('')
-  let { postID } = useParams()
+  const { postID } = useParams()
 
   const { auth } = useAuth()
 
@@ -75,17 +70,16 @@ function ShowPostPage() {
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         <div className='w-10'></div>
         <h1>UST-C</h1>
-        <Button
+        <button
           className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-          text={
-            <FontAwesomeIcon
-              icon={faHouse}
-              size='xl'
-            />
-          }
           type='button'
           onClick={() => navigate('..')}
-        />
+        >
+          <FontAwesomeIcon
+            icon={faHouse}
+            size='xl'
+          />
+        </button>
       </nav>
 
       <main>
@@ -211,14 +205,3 @@ function ShowPostPage() {
 }
 
 export default ShowPostPage
-
-export const postLoader = async ({
-  params,
-}: LoaderFunctionArgs): Promise<post> => {
-  const { postID } = params
-  const auth = getAuth()
-
-  const res = await fetchOnePost(Number(postID), auth)
-
-  return res.data.data
-}

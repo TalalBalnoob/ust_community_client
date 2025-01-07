@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
-import { comment as commentType } from '../types'
-import axios from '../utils/api/axios'
+import { comment as commentType } from '../types/posts.type'
+import { deleteComment } from '../utils/api/delete'
 import { timeAgo } from '../utils/date'
 import PrivateComponent from './PrivateComponent'
 
 type propsType = {
   comment: commentType
-  parentId: number
+  parentId: string
   onRerender: () => void
 }
 
@@ -22,11 +22,10 @@ function Comment({ comment, parentId, onRerender }: propsType) {
     const confirmation = confirm('هل انت متأكد من حذف التعليق؟')
     if (!confirmation) return 0
 
-    const res = await axios.delete(
-      `/posts/${parentId}/comments/${comment.id}`,
-      {
-        headers: { Authorization: `Bearer ${auth.token}` },
-      },
+    const res = await deleteComment(
+      parentId as string,
+      comment.id.toString(),
+      auth,
     )
 
     if (res.status === 200) {

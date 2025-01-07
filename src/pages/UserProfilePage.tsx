@@ -2,15 +2,9 @@ import { faHouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 import Avatar from 'react-avatar'
-import {
-  LoaderFunctionArgs,
-  useLoaderData,
-  useNavigate,
-} from 'react-router-dom'
-import { Button, PostFeed } from '../components'
-import { getAuth } from '../context/AuthProvider'
-import { staff, student, userProfile } from '../types'
-import { fetchUserProfile } from '../utils/api/fetchMethods'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import { PostFeed } from '../components'
+import { staff, student, userProfile } from '../types/userProfile.type'
 
 function UserProfilePage() {
   const { user_type_id, followers, following } = useLoaderData() as userProfile
@@ -21,8 +15,10 @@ function UserProfilePage() {
       : never
   const { profile } =
     user_type_id === 1
-      ? (useLoaderData() as ProfileType<1>)
-      : (useLoaderData() as ProfileType<2>)
+      ? // eslint-disable-next-line react-hooks/rules-of-hooks
+        (useLoaderData() as ProfileType<1>)
+      : // eslint-disable-next-line react-hooks/rules-of-hooks
+        (useLoaderData() as ProfileType<2>)
   const navigate = useNavigate()
   const [view, setView] = useState<'posts' | 'comments'>('posts')
 
@@ -31,17 +27,16 @@ function UserProfilePage() {
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         <div className='w-10'></div>
         <h1>UST-C</h1>
-        <Button
+        <button
           className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-          text={
-            <FontAwesomeIcon
-              icon={faHouse}
-              size='xl'
-            />
-          }
           type='button'
           onClick={() => navigate('..')}
-        />
+        >
+          <FontAwesomeIcon
+            icon={faHouse}
+            size='xl'
+          />
+        </button>
       </nav>
       <main className='m-x-auto mt-6 w-full'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
@@ -67,6 +62,7 @@ function UserProfilePage() {
               <div>المتابعين {following}</div>
             </div>
           </div>
+          {/* FIXME: make the img work */}
           {true ? (
             <img
               src={'/vite.svg'}
@@ -119,14 +115,3 @@ function UserProfilePage() {
 }
 
 export default UserProfilePage
-
-export const userProfileLoader = async ({
-  params,
-}: LoaderFunctionArgs): Promise<userProfile> => {
-  const { userID } = params
-  const auth = getAuth()
-
-  const res = await fetchUserProfile(userID as string, auth)
-
-  return res.data.user
-}

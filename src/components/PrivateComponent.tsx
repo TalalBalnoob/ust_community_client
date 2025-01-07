@@ -1,7 +1,7 @@
 import useAuth from '../context/AuthProvider'
 
 type propsType = {
-  ownerId: Number
+  ownerId: number
   component: import('react').ReactNode
 }
 

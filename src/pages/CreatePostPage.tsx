@@ -2,7 +2,6 @@ import { faEraser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Button } from '../components'
 import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
 
@@ -43,16 +42,15 @@ function CreatePostPage() {
           to='..'
           end
         >
-          <Button
+          <button
             className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-            text={
-              <FontAwesomeIcon
-                icon={faEraser}
-                size='xl'
-              />
-            }
             type='button'
-          />
+          >
+            <FontAwesomeIcon
+              icon={faEraser}
+              size='xl'
+            />
+          </button>
         </NavLink>
       </nav>
       <form
@@ -107,11 +105,12 @@ function CreatePostPage() {
           />
         </label>
 
-        <Button
-          text='نشر'
+        <button
           type='submit'
           className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'
-        />
+        >
+          نشر
+        </button>
       </form>
     </div>
   )

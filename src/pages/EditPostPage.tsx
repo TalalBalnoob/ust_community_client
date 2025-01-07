@@ -2,30 +2,28 @@ import { faHome } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
 import {
-  LoaderFunctionArgs,
   NavLink,
   useLoaderData,
   useNavigate,
   useParams,
 } from 'react-router-dom'
-import { Button } from '../components'
-import useAuth, { getAuth } from '../context/AuthProvider'
-import { post } from '../types'
+import useAuth from '../context/AuthProvider'
+import { post } from '../types/posts.type'
 import axios from '../utils/api/axios'
-import { fetchOnePost } from '../utils/api/fetchMethods'
+import { deletePost } from '../utils/api/delete'
 
 function EditPostPage() {
   const post = useLoaderData() as post
   const { auth } = useAuth()
   const navigate = useNavigate()
-  let { postID } = useParams()
+  const { postID } = useParams()
   const [title, setTitle] = useState<string>('')
   const [body, setBody] = useState<string>('')
 
   useEffect(() => {
     setTitle(() => post.title ?? '')
     setBody(() => post.body)
-  }, [])
+  }, [post.body, post.title])
 
   const handlePostSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -45,9 +43,7 @@ function EditPostPage() {
     const confirmation = confirm('هل انت متأكد من حذف المنشور؟')
     if (!confirmation) return 0
 
-    const res = await axios.delete(`/posts/${postID}`, {
-      headers: { Authorization: `Bearer ${auth.token}` },
-    })
+    const res = await deletePost(postID as string, auth)
 
     if (res.status === 200) {
       return navigate('..')
@@ -63,16 +59,15 @@ function EditPostPage() {
           to='..'
           end
         >
-          <Button
+          <button
             className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-            text={
-              <FontAwesomeIcon
-                icon={faHome}
-                size='xl'
-              />
-            }
             type='button'
-          />
+          >
+            <FontAwesomeIcon
+              icon={faHome}
+              size='xl'
+            />
+          </button>
         </NavLink>
       </nav>
       <form
@@ -112,31 +107,22 @@ function EditPostPage() {
             className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
           />
         </label>
-        <Button
-          text='نشر'
+        <button
           type='submit'
           className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'
-        />
-        <Button
-          text='حذف المنشور'
+        >
+          نشر
+        </button>
+        <button
           type='button'
           className='mt-4 w-3/4 rounded bg-red-800 p-2 px-4 focus:bg-red-700'
           onClick={handleDeletePost}
-        />
+        >
+          حذف المنشور
+        </button>
       </form>
     </div>
   )
 }
 
 export default EditPostPage
-
-export const editPostLoader = async ({
-  params,
-}: LoaderFunctionArgs): Promise<post> => {
-  const { postID } = params
-  const auth = getAuth()
-
-  const { data } = await fetchOnePost(Number(postID), auth)
-
-  return data.data
-}
