@@ -22,3 +22,17 @@ export const fetchOnePost = async (postID: number, auth: AuthData) => {
     headers: { Authorization: `Bearer ${auth.token}` },
   })
 }
+
+export const editPost = async (
+  postID: string,
+  auth: AuthData,
+  { title, body }: { title: string; body: string },
+) => {
+  return await axios.put(
+    `/posts/${postID}`,
+    { title, body },
+    {
+      headers: { Authorization: `Bearer ${auth.token}` },
+    },
+  )
+}

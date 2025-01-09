@@ -12,7 +12,7 @@ import { Comment, LikeBtn, PrivateComponent } from '../components'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types/posts.type'
 import axios from '../utils/api/axios'
-import { likePost, unlikePost } from '../utils/api/fetchPosts'
+import { likePost, unlikePost } from '../utils/api/likes'
 import { timeAgo } from '../utils/date'
 
 function ShowPostPage() {
@@ -34,8 +34,8 @@ function ShowPostPage() {
     })
 
     if (res.status === 200) {
-      setCommentBody(() => '')
       setDummy((v) => !v)
+      setCommentBody(() => '')
     }
   }
 

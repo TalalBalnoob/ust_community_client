@@ -1,10 +1,7 @@
-// TODO: add some error handling
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
-import axios from '../utils/api/axios'
-
-const LOGIN_URL = '/login'
+import { login } from '../utils/api/auth'
 
 function LoginPage() {
   const { setAuth } = useAuth()
@@ -16,17 +13,10 @@ function LoginPage() {
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     try {
-      const res = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ username, password }),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        },
-      )
+      const { data } = await login({ username, password })
       setAuth({
-        token: res.data.token,
-        userData: { id: res.data.user.id, username: res.data.user.username },
+        token: data.token,
+        userData: { id: data.user.id, username: data.user.username },
       })
       navigate('/')
     } catch {

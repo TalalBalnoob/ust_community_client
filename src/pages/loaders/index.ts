@@ -1,7 +1,9 @@
 import { LoaderFunctionArgs } from 'react-router-dom'
 import { getAuth } from '../../context/AuthProvider'
-import { post, userProfile } from '../../types'
-import { fetchOnePost, fetchUserProfile } from '../../utils/api/fetchPosts'
+import { post } from '../../types/posts.type'
+import { userProfile } from '../../types/userProfile.type'
+import { fetchOnePost } from '../../utils/api/fetchPosts'
+import { fetchUserProfile } from '../../utils/api/userProfile'
 
 // ------------- Posts ----------------
 export const postLoader = async ({

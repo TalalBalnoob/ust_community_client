@@ -9,8 +9,8 @@ import {
 } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types/posts.type'
-import axios from '../utils/api/axios'
 import { deletePost } from '../utils/api/delete'
+import { editPost } from '../utils/api/fetchPosts'
 
 function EditPostPage() {
   const post = useLoaderData() as post
@@ -28,14 +28,7 @@ function EditPostPage() {
   const handlePostSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    const res = await axios.put(
-      `/posts/${postID}`,
-      { title, body },
-      {
-        headers: { Authorization: `Bearer ${auth.token}` },
-      },
-    )
-
+    const res = await editPost(postID as string, auth, { title, body })
     if (res.status === 200) navigate('/')
   }
 
