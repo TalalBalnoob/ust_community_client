@@ -1,7 +1,7 @@
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
-import { Button, PostFeed } from '../components'
+import { PostFeed } from '../components'
 
 function HomePage() {
   const navigate = useNavigate()
@@ -11,17 +11,16 @@ function HomePage() {
         {/* Filler div to make the layout as |space -- title -- btn| */}
         <div className='w-10'></div>
         <h1>UST-C</h1>
-        <Button
+        <button
           className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-          text={
-            <FontAwesomeIcon
-              icon={faPenToSquare}
-              size='xl'
-            />
-          }
           type='button'
           onClick={() => navigate('/create')}
-        />
+        >
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            size='xl'
+          />
+        </button>
       </nav>
       <PostFeed />
     </div>

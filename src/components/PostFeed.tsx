@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useAuth from '../context/AuthProvider'
-import { post } from '../types'
-import { fetchAllPosts } from '../utils/api/fetchMethods'
+import { post } from '../types/posts.type'
+import { fetchAllPosts } from '../utils/api/fetchPosts'
 import Post from './Post'
 
 function PostFeed() {
@@ -22,9 +22,10 @@ function PostFeed() {
     }
 
     fetchPosts()
-  }, [page, dummy])
+  }, [page, dummy, auth])
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handelScroll = (e: any) => {
       const scrollHeight = e.target.documentElement.scrollHeight
       const currentHeight =

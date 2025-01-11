@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
 import { Link, useNavigate } from 'react-router-dom'
 import useAuth from '../context/AuthProvider'
-import { post } from '../types'
-import { likePost, unlikePost } from '../utils/api/fetchMethods'
+import { post } from '../types/posts.type'
+import { likePost, unlikePost } from '../utils/api/likes'
 import { timeAgo } from '../utils/date'
 import useLanguageDetection from '../utils/lang/LanguageDetector'
 import LikeBtn from './LikeBtn'
@@ -35,7 +35,6 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       if (status === 200) {
         post.isLiked = false
         post.likes--
-        post = post
         setDummy((v) => !v)
       }
     }
@@ -43,11 +42,8 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
 
   useEffect(() => {
     detectLanguage(post.body)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  const handleNavigation = () => {
-    navigate('/posts/1', { replace: false })
-  }
 
   return (
     <div className='h-fit w-full border-b border-t border-gray-200/10 p-3'>

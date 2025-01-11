@@ -1,8 +1,5 @@
-export type AuthData = {
-  token: string
-  userData: { id: number; username: string }
-}
 import { useState } from 'react'
+import { AuthData } from '../types/auth.type'
 
 export const getAuth = (): AuthData => {
   // TODO: add a check request to check if token still valid

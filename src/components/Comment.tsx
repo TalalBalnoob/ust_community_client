@@ -1,39 +1,16 @@
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
-import { useNavigate } from 'react-router-dom'
-import useAuth from '../context/AuthProvider'
-import { comment as commentType } from '../types'
-import axios from '../utils/api/axios'
+import { comment } from '../types/posts.type'
 import { timeAgo } from '../utils/date'
 import PrivateComponent from './PrivateComponent'
 
 type propsType = {
-  comment: commentType
-  parentId: number
-  onRerender: () => void
+  comment: comment
+  handleDeleteComment: (commentID: number) => void
 }
 
-function Comment({ comment, parentId, onRerender }: propsType) {
-  const { auth } = useAuth()
-  const navigate = useNavigate()
-
-  async function handleDeleteComment() {
-    const confirmation = confirm('هل انت متأكد من حذف التعليق؟')
-    if (!confirmation) return 0
-
-    const res = await axios.delete(
-      `/posts/${parentId}/comments/${comment.id}`,
-      {
-        headers: { Authorization: `Bearer ${auth.token}` },
-      },
-    )
-
-    if (res.status === 200) {
-      onRerender()
-      return navigate(`/posts/${parentId}`)
-    }
-  }
+function Comment({ comment, handleDeleteComment }: propsType) {
   return (
     <div className='block h-fit w-full border-b border-t border-gray-200/10 p-3'>
       {/* User top info */}
@@ -64,7 +41,7 @@ function Comment({ comment, parentId, onRerender }: propsType) {
               <FontAwesomeIcon
                 icon={faTrashCan}
                 className='text-zinc-400'
-                onClick={handleDeleteComment}
+                onClick={() => handleDeleteComment(comment.id)}
               />
             </button>
           }

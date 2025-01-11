@@ -1,14 +1,10 @@
-// TODO: add some error handling
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button } from '../components'
 import useAuth from '../context/AuthProvider'
-import axios from '../utils/api/axios'
-
-const LOGIN_URL = '/login'
+import { login } from '../utils/api/auth'
 
 function LoginPage() {
-  const { auth, setAuth } = useAuth()
+  const { setAuth } = useAuth()
   const navigate = useNavigate()
   const [username, setUsername] = useState('202110500133')
   const [password, setPassword] = useState('password')
@@ -17,20 +13,13 @@ function LoginPage() {
   async function handleLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     try {
-      const res = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ username, password }),
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        },
-      )
+      const { data } = await login({ username, password })
       setAuth({
-        token: res.data.token,
-        userData: { id: res.data.user.id, username: res.data.user.username },
+        token: data.token,
+        userData: { id: data.user.id, username: data.user.username },
       })
       navigate('/')
-    } catch (err: any) {
+    } catch {
       setPassword('')
       setErrorMsg('خطاء في رقم السند او كلمة المرور')
     }
@@ -76,11 +65,12 @@ function LoginPage() {
           <div className='error_block my-2 h-2'>
             <p className='select-none text-red-600'>{errorMsg}</p>
           </div>
-          <Button
-            text='تسجيل دخول'
+          <button
             type='submit'
             className='mt-4 w-1/2 rounded bg-green-600 p-1 text-white'
-          />
+          >
+            تسجيل دخول
+          </button>
         </form>
       </div>
     </div>

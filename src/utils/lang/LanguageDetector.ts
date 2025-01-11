@@ -24,7 +24,7 @@ const useLanguageDetection = (): UseLanguageDetectionResult => {
       }
 
       setError('') // Clear any previous errors
-    } catch (err) {
+    } catch {
       setError('Error detecting language')
       setDetectedLanguage('')
     }
