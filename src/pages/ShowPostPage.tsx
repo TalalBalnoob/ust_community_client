@@ -10,8 +10,9 @@ import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 import { Comment, LikeBtn, PrivateComponent } from '../components'
 import useAuth from '../context/AuthProvider'
-import { post } from '../types/posts.type'
+import { comment, post } from '../types/posts.type'
 import axios from '../utils/api/axios'
+import { deleteComment } from '../utils/api/delete'
 import { likePost, unlikePost } from '../utils/api/likes'
 import { timeAgo } from '../utils/date'
 
@@ -19,6 +20,7 @@ function ShowPostPage() {
   const post = useLoaderData() as post
   const navigate = useNavigate()
   const [, setDummy] = useState(true)
+  const [comment, setComment] = useState<comment[]>(post.comments)
   const [commentBody, setCommentBody] = useState<string>('')
   const { postID } = useParams()
 
@@ -27,15 +29,23 @@ function ShowPostPage() {
   async function handleFormSubmit(e: FormEvent) {
     e.preventDefault()
 
-    const formData = new FormData()
-    formData.append('body', commentBody as string)
-    const res = await axios.post(`/posts/${post.id}/comments`, formData, {
-      headers: { Authorization: `Bearer ${auth.token}` },
-    })
+    try {
+      const res = await axios.post(
+        `/posts/${post.id}/comments`,
+        { body: commentBody },
+        {
+          headers: { Authorization: `Bearer ${auth.token}` },
+        },
+      )
 
-    if (res.status === 200) {
-      setDummy((v) => !v)
-      setCommentBody(() => '')
+      if (res.status === 200) {
+        setComment((prevComments) => [...prevComments, res.data])
+        setCommentBody('')
+      } else {
+        console.error('Error submitting the comment')
+      }
+    } catch (error) {
+      console.error('Error:', error)
     }
   }
 
@@ -61,8 +71,19 @@ function ShowPostPage() {
     }
   }
 
-  const triggerRerender = () => {
-    setDummy((v) => !v)
+  async function handleDeleteComment(commentID: number) {
+    const confirmation = confirm('هل انت متأكد من حذف التعليق؟')
+    if (!confirmation) return 0
+
+    const res = await deleteComment(
+      postID as string,
+      commentID.toString(),
+      auth,
+    )
+
+    if (res.status === 200) {
+      setComment((comment) => comment.filter((com) => com.id !== commentID))
+    }
   }
 
   return (
@@ -188,18 +209,20 @@ function ShowPostPage() {
               نشر
             </button>
             <h2 className='mx-2 mb-3 mt-6 text-right text-xl'>
-              {post?.comments.length} التعليقات
+              {comment.length} التعليقات
             </h2>
           </div>
         </form>
       </div>
-      {post?.comments.map((comment) => (
-        <Comment
-          comment={comment}
-          parentId={post?.id}
-          onRerender={triggerRerender}
-        />
-      ))}
+      {comment.map((comment) => {
+        return (
+          <Comment
+            comment={comment}
+            key={comment.id}
+            handleDeleteComment={handleDeleteComment}
+          />
+        )
+      })}
     </div>
   )
 }
