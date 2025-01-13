@@ -1,3 +1,4 @@
+import { AuthData } from '../../types/auth.type'
 import axios from './axios'
 
 export const login = async ({
@@ -11,4 +12,16 @@ export const login = async ({
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true,
   })
+}
+
+export const logout = async (auth: AuthData) => {
+  return await axios.post(
+    '/logout',
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${auth.token}`,
+      },
+    },
+  )
 }

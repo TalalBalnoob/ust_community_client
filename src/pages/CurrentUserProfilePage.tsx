@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { ProfilePostFeed } from '../components'
+import { logout } from '../context/AuthProvider'
 import { staff, student, userProfile } from '../types/userProfile.type'
 
-function UserProfilePage() {
+function CurrentUserProfilePage() {
   const { user_type_id, followers, following } = useLoaderData() as userProfile
   type ProfileType<T extends number> = T extends 1
     ? userProfile<student>
@@ -23,7 +24,14 @@ function UserProfilePage() {
   return (
     <div className='h-screen w-screen'>
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
-        <div className='w-10'></div>
+        <button
+          className='bg-red-400 p-2 text-lg'
+          onClick={async () => {
+            if (await logout()) navigate('/login')
+          }}
+        >
+          Logout
+        </button>
         <h1>UST-C</h1>
         <button
           className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
@@ -92,4 +100,4 @@ function UserProfilePage() {
   )
 }
 
-export default UserProfilePage
+export default CurrentUserProfilePage

@@ -1,4 +1,4 @@
-import { LoaderFunctionArgs } from 'react-router-dom'
+import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { getAuth } from '../../context/AuthProvider'
 import { post } from '../../types/posts.type'
 import { userProfile } from '../../types/userProfile.type'
@@ -11,6 +11,7 @@ export const postLoader = async ({
 }: LoaderFunctionArgs): Promise<post> => {
   const { postID } = params
   const auth = getAuth()
+  if (!auth) return redirect('/login')
 
   const res = await fetchOnePost(Number(postID), auth)
 
@@ -22,6 +23,7 @@ export const editPostLoader = async ({
 }: LoaderFunctionArgs): Promise<post> => {
   const { postID } = params
   const auth = getAuth()
+  if (!auth) return redirect('/login')
 
   const { data } = await fetchOnePost(Number(postID), auth)
 
@@ -34,8 +36,20 @@ export const userProfileLoader = async ({
 }: LoaderFunctionArgs): Promise<userProfile> => {
   const { userID } = params
   const auth = getAuth()
+  if (!auth) return redirect('/login')
 
   const res = await fetchUserProfile(userID as string, auth)
+
+  return res.data.user
+}
+
+// ------------- Profile ----------------
+export const CurrentUserProfileLoader = async (): Promise<userProfile> => {
+  const auth = getAuth()
+
+  if (!auth) return redirect('/login')
+
+  const res = await fetchUserProfile(auth.userData.id.toString(), auth)
 
   return res.data.user
 }

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import useAuth from '../context/AuthProvider'
-import { post } from '../types/posts.type'
-import { fetchAllPosts } from '../utils/api/fetchPosts'
-import Post from './Post'
+import useAuth from '../../context/AuthProvider'
+import { post } from '../../types/posts.type'
+import { fetchAllPosts } from '../../utils/api/fetchPosts'
+import Post from '../posts/Post'
 
 function PostFeed() {
   const [posts, setPosts] = useState<post[]>([])

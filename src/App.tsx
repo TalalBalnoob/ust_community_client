@@ -1,13 +1,20 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import useAuth from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
+import CurrentUserProfilePage from './pages/CurrentUserProfilePage'
 import EditPostPage from './pages/EditPostPage'
 import HomePage from './pages/HomePage'
-import { editPostLoader, postLoader, userProfileLoader } from './pages/loaders'
+import {
+  CurrentUserProfileLoader,
+  editPostLoader,
+  postLoader,
+  userProfileLoader,
+} from './pages/loaders'
 import LoginPage from './pages/LoginPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
 import NotFoundPage from './pages/utils pages/NotFoundPage'
+import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
   const { auth } = useAuth()
@@ -18,6 +25,8 @@ function App() {
     },
     {
       errorElement: <NotFoundPage />,
+      element: <PrivateRoutes />,
+      path: '/',
       children: [
         {
           path: '/',
@@ -26,6 +35,11 @@ function App() {
         {
           path: '/create',
           element: <CreatePostPage />,
+        },
+        {
+          path: '/profile',
+          element: <CurrentUserProfilePage />,
+          loader: CurrentUserProfileLoader,
         },
         {
           path: '/posts/:postID',
