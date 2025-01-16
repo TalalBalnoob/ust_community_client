@@ -1,6 +1,6 @@
 import { comment, post } from '../../types/posts.type'
-import Comment from '../Comment'
 import Post from '../posts/Post'
+import CustomProfileComment from './CustomProfileComment'
 
 type RenderContentPopsType = {
   posts: post[]
@@ -33,10 +33,9 @@ export const RenderComments = ({ comments }: { comments: comment[] }) => {
   if (comments.length > 0) {
     return comments.map((comment) => (
       // TODO: replace this component with custom new one
-      <Comment
+      <CustomProfileComment
         comment={comment}
         key={comment.id}
-        handleDeleteComment={() => {}}
       />
     ))
   }
