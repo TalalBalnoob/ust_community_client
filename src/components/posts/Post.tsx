@@ -51,7 +51,8 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       <div
         className='flex w-fit cursor-default items-start gap-2'
         onClick={() => {
-          navigate(`/users/${post.user_id}`)
+          if (post.user_id === auth.userData.id) navigate('/profile')
+          else navigate(`/users/${post.user_id}`)
         }}
       >
         {/* User Image */}

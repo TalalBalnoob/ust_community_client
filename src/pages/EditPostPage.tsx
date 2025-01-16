@@ -29,7 +29,7 @@ function EditPostPage() {
     e.preventDefault()
 
     const res = await editPost(postID as string, auth, { title, body })
-    if (res.status === 200) navigate('/')
+    if (res.status === 200) navigate(`/posts/${postID}`)
   }
 
   async function handleDeletePost() {
@@ -39,7 +39,7 @@ function EditPostPage() {
     const res = await deletePost(postID as string, auth)
 
     if (res.status === 200) {
-      return navigate('..')
+      return navigate(`..`)
     }
   }
 

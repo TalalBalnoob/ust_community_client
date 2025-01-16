@@ -20,6 +20,8 @@ function UserProfilePage() {
         (useLoaderData() as ProfileType<2>)
   const navigate = useNavigate()
 
+  console.log(comments)
+
   return (
     <div className='h-screen w-screen'>
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
@@ -42,7 +44,7 @@ function UserProfilePage() {
             <h1 className='flex items-baseline gap-x-2 text-2xl'>
               <p className='text-sm text-gray-200/40'>
                 {user_type_id === 1
-                  ? `Level ${(profile as student).level}`
+                  ? `مستوى ${(profile as student).level}`
                   : 'موظف'}
               </p>{' '}
               {profile.displayName}

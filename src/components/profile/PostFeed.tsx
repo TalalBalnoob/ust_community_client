@@ -1,20 +1,24 @@
 import { useState } from 'react'
 import { comment, post } from '../../types/posts.type'
-import Post from '../posts/Post'
+import { RenderContent } from './utilsComponents'
 
 function PostFeed({
   userPosts,
+  userComments,
 }: {
   userPosts: post[]
-  userComments?: comment[]
+  userComments: comment[]
 }) {
   const [posts] = useState<post[]>(userPosts)
+  const [comments] = useState<comment[]>(userComments)
   const [, setDummy] = useState(true)
   const [view, setView] = useState<'posts' | 'comments'>('posts')
 
   const triggerRerender = () => {
     setDummy((v) => !v)
   }
+
+  console.log(comments)
 
   return (
     <>
@@ -37,17 +41,12 @@ function PostFeed({
         </div>
 
         <section>
-          {view === 'posts' ? (
-            posts.map((post) => (
-              <Post
-                post={post}
-                key={post.id}
-                triggerRerender={triggerRerender}
-              />
-            ))
-          ) : (
-            <h1>لا يوجد تعليقات</h1>
-          )}
+          <RenderContent
+            view={view}
+            posts={posts}
+            comments={comments}
+            triggerRerender={triggerRerender}
+          />
         </section>
       </div>
     </>
