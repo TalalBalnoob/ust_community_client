@@ -1,7 +1,6 @@
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import useAuth from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
-import CurrentUserProfilePage from './pages/CurrentUserProfilePage'
 import EditPostPage from './pages/EditPostPage'
 import HomePage from './pages/HomePage'
 import {
@@ -38,7 +37,7 @@ function App() {
         },
         {
           path: '/profile',
-          element: <CurrentUserProfilePage />,
+          element: <UserProfilePage />,
           loader: CurrentUserProfileLoader,
         },
         {
