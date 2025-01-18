@@ -70,8 +70,21 @@ function CurrentUserProfilePage() {
             </div>
             <div className='mt-auto flex'>
               {/* TODO: Add a btn that show the followers and the following */}
-              <div className='mr-auto'>المتابعين {followers}</div>
-              <div>المتابعين {following}</div>
+              <div
+                className='mr-auto'
+                onClick={() => {
+                  navigate(`/users/${id}/followers`)
+                }}
+              >
+                المتابعين {followers}
+              </div>
+              <div
+                onClick={() => {
+                  navigate(`/users/${id}/followings`)
+                }}
+              >
+                المتابعين {following}
+              </div>
             </div>
           </div>
           {/* FIXME: make the img work */}

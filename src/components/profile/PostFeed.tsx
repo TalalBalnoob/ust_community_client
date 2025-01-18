@@ -18,8 +18,6 @@ function PostFeed({
     setDummy((v) => !v)
   }
 
-  console.log(comments)
-
   return (
     <>
       <div className='mx-auto mt-4 flex w-full flex-col justify-end text-right'>

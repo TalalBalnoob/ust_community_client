@@ -18,7 +18,6 @@ export const RenderPosts = ({
 }) => {
   if (posts.length > 0) {
     return posts.map((post) => (
-      // TODO: replace this component with custom new one
       <Post
         post={post}
         key={post.id}
@@ -32,7 +31,6 @@ export const RenderPosts = ({
 export const RenderComments = ({ comments }: { comments: comment[] }) => {
   if (comments.length > 0) {
     return comments.map((comment) => (
-      // TODO: replace this component with custom new one
       <CustomProfileComment
         comment={comment}
         key={comment.id}

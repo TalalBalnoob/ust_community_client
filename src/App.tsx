@@ -7,11 +7,14 @@ import {
   CurrentUserProfileLoader,
   editPostLoader,
   postLoader,
+  userFollowersLoader,
+  userFollowingsLoader,
   userProfileLoader,
 } from './pages/loaders'
 import LoginPage from './pages/LoginPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
+import UserList from './pages/UsersList'
 import NotFoundPage from './pages/utils pages/NotFoundPage'
 import PrivateRoutes from './utils/PrivateRoutes'
 
@@ -55,6 +58,16 @@ function App() {
           path: '/users/:userID',
           element: <UserProfilePage />,
           loader: userProfileLoader,
+        },
+        {
+          path: '/users/:userID/followers',
+          element: <UserList />,
+          loader: userFollowersLoader,
+        },
+        {
+          path: '/users/:userID/followings',
+          element: <UserList />,
+          loader: userFollowingsLoader,
         },
       ],
     },
