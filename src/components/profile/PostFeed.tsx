@@ -24,14 +24,14 @@ function PostFeed({
         <div className='flex'>
           <button
             value={'comments'}
-            className='mx-0 h-8 w-full border border-gray-200/30'
+            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'comments' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
             onClick={() => setView('comments')}
           >
             التعليقات
           </button>
           <button
             value={'posts'}
-            className='mx-0 h-8 w-full border border-gray-200/30'
+            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'posts' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
             onClick={() => setView('posts')}
           >
             المنشورات

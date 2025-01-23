@@ -69,7 +69,6 @@ function CurrentUserProfilePage() {
               </h3>
             </div>
             <div className='mt-auto flex'>
-              {/* TODO: Add a btn that show the followers and the following */}
               <div
                 className='mr-auto'
                 onClick={() => {
@@ -87,18 +86,18 @@ function CurrentUserProfilePage() {
               </div>
             </div>
           </div>
-          {/* FIXME: make the img work */}
-          {true ? (
+          {profile.imageUrl ? (
             <img
               src={'/vite.svg'}
               alt=''
               className='size-24 rounded-md'
             />
           ) : (
+            // TODO: replace the img lib
             <Avatar
               name={`${profile.displayName}`}
               size='100'
-              round={'100px'}
+              round={'6px'}
             />
           )}
         </div>

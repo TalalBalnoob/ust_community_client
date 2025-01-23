@@ -15,7 +15,7 @@ function CustomProfileComment({ comment }: propsType) {
       className='block h-fit w-full border-b border-t border-gray-200/10 p-3'
     >
       {/* User top info */}
-      <div className='flex w-full items-center gap-2'>
+      <div className='flex w-full items-start gap-2'>
         {/* User Image */}
         {comment.user.imageUrl ? (
           <img
@@ -31,7 +31,7 @@ function CustomProfileComment({ comment }: propsType) {
           />
         )}
         {/* User name */}
-        <div className='flex items-baseline gap-2'>
+        <div className='flex items-start gap-2'>
           <h4 className='text-white'>{comment.user.displayName}</h4>
           <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
         </div>
