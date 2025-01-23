@@ -76,14 +76,14 @@ function CurrentUserProfilePage() {
                   navigate(`/users/${id}/followers`)
                 }}
               >
-                المتابعين {followers}
+                متابعين {followers}
               </div>
               <div
                 onClick={() => {
                   navigate(`/users/${id}/followings`)
                 }}
               >
-                المتابعين {following}
+                متابعة {following}
               </div>
             </div>
           </div>

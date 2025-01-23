@@ -17,9 +17,9 @@ export const postLoader = async ({
   const auth = getAuth()
   if (!auth) return redirect('/login')
 
-  const res = await fetchOnePost(Number(postID), auth)
+  const { data } = await fetchOnePost(Number(postID), auth)
 
-  return res.data.data
+  return data
 }
 
 export const editPostLoader = async ({
@@ -31,7 +31,7 @@ export const editPostLoader = async ({
 
   const { data } = await fetchOnePost(Number(postID), auth)
 
-  return data.data
+  return data
 }
 
 // ------------- Profile ----------------
@@ -42,9 +42,9 @@ export const userProfileLoader = async ({
   const auth = getAuth()
   if (!auth) return redirect('/login')
 
-  const res = await fetchUserProfile(userID as string, auth)
+  const { data } = await fetchUserProfile(userID as string, auth)
 
-  return res.data.user
+  return data
 }
 
 // ------------- Profile ----------------
@@ -53,9 +53,9 @@ export const CurrentUserProfileLoader = async (): Promise<userProfile> => {
 
   if (!auth) return redirect('/login')
 
-  const res = await fetchUserProfile(auth.userData.id.toString(), auth)
+  const { data } = await fetchUserProfile(auth.userData.id.toString(), auth)
 
-  return res.data.user
+  return data
 }
 
 export const userFollowersLoader = async ({
@@ -66,9 +66,9 @@ export const userFollowersLoader = async ({
 
   if (!auth) return redirect('/login')
 
-  const res = await fetchUserFollowers(userID as string, auth)
+  const { data } = await fetchUserFollowers(userID as string, auth)
 
-  return res.data.users
+  return data
 }
 
 export const userFollowingsLoader = async ({
@@ -79,7 +79,7 @@ export const userFollowingsLoader = async ({
 
   if (!auth) return redirect('/login')
 
-  const res = await fetchUserFollowings(userID as string, auth)
+  const { data } = await fetchUserFollowings(userID as string, auth)
 
-  return res.data.users
+  return data
 }
