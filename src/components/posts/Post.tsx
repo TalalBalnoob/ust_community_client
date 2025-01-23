@@ -106,7 +106,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       </Link>
 
       {/* Post interactions */}
-      <div className='mt-1 flex justify-around'>
+      <div className='mt-2 flex justify-around'>
         <LikeBtn
           likes={post.likes}
           isLiked={post.isLiked}

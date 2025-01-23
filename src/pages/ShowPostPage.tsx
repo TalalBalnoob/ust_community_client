@@ -30,6 +30,7 @@ function ShowPostPage() {
     e.preventDefault()
 
     try {
+      console.log('hi i am here')
       const res = await axios.post(
         `/posts/${post.id}/comments`,
         { body: commentBody },
@@ -38,7 +39,7 @@ function ShowPostPage() {
         },
       )
 
-      if (res.status === 200) {
+      if (res.status === 201) {
         setComment((prevComments) => [...prevComments, res.data])
         setCommentBody('')
       } else {
@@ -147,7 +148,7 @@ function ShowPostPage() {
             </div>
           </div>
           {/* Post interactions */}
-          <div className='mt-1 flex justify-around'>
+          <div className='mt-2 flex justify-around'>
             {/* Like btn */}
             <LikeBtn
               likes={post?.likes as number}

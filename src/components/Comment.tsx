@@ -16,22 +16,22 @@ function Comment({ comment, handleDeleteComment }: propsType) {
       {/* User top info */}
       <div className='flex w-full items-center gap-2'>
         {/* User Image */}
-        {comment.user.imageUrl ? (
+        {comment.user.profile.imageUrl ? (
           <img
-            src={comment.user.imageUrl}
+            src={comment.user.profile.imageUrl}
             alt=''
             className='size-9 rounded-md'
           />
         ) : (
           <Avatar
-            name={`${comment.user.displayName}`}
+            name={`${comment.user.profile.displayName}`}
             size='36'
             round={'6px'}
           />
         )}
         {/* User name */}
         <div className='flex items-baseline gap-2'>
-          <h4 className='text-white'>{comment.user.displayName}</h4>
+          <h4 className='text-white'>{comment.user.profile.displayName}</h4>
           <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
         </div>
         <PrivateComponent

@@ -1,4 +1,4 @@
-import { staff, student } from './userProfile.type'
+import { staff, student, userProfile } from './userProfile.type'
 
 export interface post {
   id: number
@@ -22,5 +22,5 @@ export interface comment {
   attachment_url: null
   created_at: string
   updated_at: string
-  user: student | staff
+  user: userProfile<student | staff>
 }

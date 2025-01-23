@@ -86,20 +86,22 @@ function CurrentUserProfilePage() {
               </div>
             </div>
           </div>
-          {profile.imageUrl ? (
-            <img
-              src={'/vite.svg'}
-              alt=''
-              className='size-24 rounded-md'
-            />
-          ) : (
-            // TODO: replace the img lib
-            <Avatar
-              name={`${profile.displayName}`}
-              size='100'
-              round={'6px'}
-            />
-          )}
+          <div className='mr-2'>
+            {profile.imageUrl ? (
+              <img
+                src={'/vite.svg'}
+                alt=''
+                className='size-24 rounded-md'
+              />
+            ) : (
+              // TODO: replace the img lib
+              <Avatar
+                name={`${profile.displayName}`}
+                size='100'
+                round={'6px'}
+              />
+            )}
+          </div>
         </div>
 
         <div className='my-6 flex flex-col items-end'>
