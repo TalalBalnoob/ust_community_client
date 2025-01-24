@@ -37,3 +37,30 @@ body {
   font-weight: 400;
   @apply bg-zinc-900 text-zinc-200;
 }
+
+@import-normalize;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer components {
+  .sidebar-icon {
+    @apply relative mx-auto mt-2 flex h-12 w-12 cursor-pointer items-center justify-center rounded-3xl bg-zinc-800 text-zinc-200 shadow-lg transition-all duration-300 ease-linear;
+
+    .active {
+      @apply active:rounded-xl active:bg-zinc-200 active:text-zinc-900;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-500 dark:bg-green-400;
+}

@@ -1,4 +1,4 @@
-import { faEraser } from '@fortawesome/free-solid-svg-icons'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
@@ -47,7 +47,7 @@ function CreatePostPage() {
             type='button'
           >
             <FontAwesomeIcon
-              icon={faEraser}
+              icon={faCircleXmark}
               size='xl'
             />
           </button>

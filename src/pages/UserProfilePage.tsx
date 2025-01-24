@@ -1,8 +1,6 @@
-import { faHouse } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
-import { ProfilePostFeed } from '../components'
+import { MobileTabBar, ProfilePostFeed } from '../components'
 import useAuth, { logout } from '../context/AuthProvider'
 import { staff, student, userProfile } from '../types/userProfile.type'
 
@@ -39,16 +37,7 @@ function CurrentUserProfilePage() {
           <div className='w-10'></div>
         )}
         <h1>UST-C</h1>
-        <button
-          className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-          type='button'
-          onClick={() => navigate('..')}
-        >
-          <FontAwesomeIcon
-            icon={faHouse}
-            size='xl'
-          />
-        </button>
+        <div className='w-10'></div>
       </nav>
       <main className='m-x-auto mt-6 w-full'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
@@ -116,6 +105,7 @@ function CurrentUserProfilePage() {
           userComments={comments}
         />
       </main>
+      <MobileTabBar />
     </div>
   )
 }
