@@ -10,31 +10,33 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const SideBar = () => {
-  const location = useLocation()
-  console.log(location)
   return (
-    <div className='fixed bottom-0 flex min-h-fit w-screen bg-zinc-900 pb-2 shadow-lg'>
-      <SideBarIcon
-        path={'/'}
-        icon={faHome}
-      />
-      <SideBarIcon
-        path={'/search'}
-        icon={faSearch}
-      />
-      <SideBarIcon
-        path={'/create'}
-        icon={faPenToSquare}
-      />
-      <SideBarIcon
-        path={'/notifications'}
-        icon={faBell}
-      />
-      <SideBarIcon
-        path={'/profile'}
-        icon={faUser}
-      />
-    </div>
+    <>
+      <div className='h-14 w-screen'></div>
+      <div className='fixed bottom-0 flex min-h-fit w-screen border-t border-t-zinc-800/80 bg-zinc-900 pb-2'>
+        <SideBarIcon
+          path={'/'}
+          icon={faHome}
+          shadow-lg
+        />
+        <SideBarIcon
+          path={'/search'}
+          icon={faSearch}
+        />
+        <SideBarIcon
+          path={'/create'}
+          icon={faPenToSquare}
+        />
+        <SideBarIcon
+          path={'/notifications'}
+          icon={faBell}
+        />
+        <SideBarIcon
+          path={'/profile'}
+          icon={faUser}
+        />
+      </div>
+    </>
   )
 }
 

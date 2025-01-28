@@ -12,6 +12,7 @@ import {
   userProfileLoader,
 } from './pages/loaders'
 import LoginPage from './pages/LoginPage'
+import SearchPage from './pages/SearchPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
 import UserList from './pages/UsersList'
@@ -42,6 +43,10 @@ function App() {
           path: '/profile',
           element: <UserProfilePage />,
           loader: CurrentUserProfileLoader,
+        },
+        {
+          path: '/search',
+          element: <SearchPage />,
         },
         {
           path: '/posts/:postID',

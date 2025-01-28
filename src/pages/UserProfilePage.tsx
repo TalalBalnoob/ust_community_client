@@ -1,7 +1,9 @@
+import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { MobileTabBar, ProfilePostFeed } from '../components'
-import useAuth, { logout } from '../context/AuthProvider'
+import useAuth from '../context/AuthProvider'
 import { staff, student, userProfile } from '../types/userProfile.type'
 
 function CurrentUserProfilePage() {
@@ -24,25 +26,24 @@ function CurrentUserProfilePage() {
   return (
     <div className='h-screen w-screen'>
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
-        {id === auth.userData.id ? (
-          <button
-            className='bg-red-400 p-2 text-lg'
-            onClick={async () => {
-              if (await logout()) navigate('/login')
-            }}
-          >
-            Logout
-          </button>
-        ) : (
-          <div className='w-10'></div>
-        )}
+        <div className='w-10'></div>
         <h1>UST-C</h1>
         <div className='w-10'></div>
       </nav>
-      <main className='m-x-auto mt-6 w-full'>
+      <main className='m-x-auto mt-3 w-full'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
             <h1 className='flex items-baseline gap-x-2 text-2xl'>
+              {id === auth.userData.id ? (
+                <button className=''>
+                  <FontAwesomeIcon
+                    size='sm'
+                    icon={faPen}
+                  />
+                </button>
+              ) : (
+                ''
+              )}
               <p className='text-sm text-gray-200/40'>
                 {user_type_id === 1
                   ? `مستوى ${(profile as student).level}`
@@ -59,7 +60,7 @@ function CurrentUserProfilePage() {
             </div>
             <div className='mt-auto flex'>
               <div
-                className='mr-auto'
+                className='ml-auto mr-6'
                 onClick={() => {
                   navigate(`/users/${id}/followers`)
                 }}
