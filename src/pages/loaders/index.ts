@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { getAuth } from '../../context/AuthProvider'
-import { post } from '../../types/posts.type'
+import { comment, post } from '../../types/posts.type'
 import { staff, student, userProfile } from '../../types/userProfile.type'
-import { fetchOnePost } from '../../utils/api/fetchPosts'
+import { fetchOnePost, fetchPostComments } from '../../utils/api/fetchPosts'
 import {
   fetchUserFollowers,
   fetchUserFollowings,
@@ -12,14 +12,15 @@ import {
 // ------------- Posts ----------------
 export const postLoader = async ({
   params,
-}: LoaderFunctionArgs): Promise<post> => {
+}: LoaderFunctionArgs): Promise<{ post: post; comments: comment[] }> => {
   const { postID } = params
   const auth = getAuth()
   if (!auth) return redirect('/login')
 
-  const { data } = await fetchOnePost(Number(postID), auth)
+  const post = await fetchOnePost(Number(postID), auth)
+  const comments = await fetchPostComments(Number(postID), auth)
 
-  return data
+  return { post: post.data, comments: comments.data }
 }
 
 export const editPostLoader = async ({

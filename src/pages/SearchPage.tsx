@@ -30,7 +30,7 @@ function SearchPage() {
           >
             <h1 className='text-right text-xl'>البحث</h1>
             <input
-              className='w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none'
+              className='input_style'
               type='text'
               ref={searchRef}
               name='search'

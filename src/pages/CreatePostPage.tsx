@@ -13,7 +13,6 @@ function CreatePostPage() {
   const [attachment, setAttachment] = useState<File | null>(null)
   const handlePostSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    console.log(attachment)
 
     const formData = new FormData()
     formData.append('title', title)
@@ -24,7 +23,7 @@ function CreatePostPage() {
       headers: { Authorization: `Bearer ${auth.token}` },
     })
 
-    if (res.status === 200) navigate('/')
+    if (res.status === 201) navigate('/')
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -1,5 +1,5 @@
 import { AuthData } from '../../types/auth.type'
-import { post } from '../../types/posts.type'
+import { comment, post } from '../../types/posts.type'
 import axios from './axios'
 
 export const fetchAllPosts = async (
@@ -18,6 +18,12 @@ export const fetchAllPosts = async (
 
 export const fetchOnePost = async (postID: number, auth: AuthData) => {
   return await axios.get<post>(`/posts/${postID}`, {
+    headers: { Authorization: `Bearer ${auth.token}` },
+  })
+}
+
+export const fetchPostComments = async (postID: number, auth: AuthData) => {
+  return await axios.get<comment[]>(`/posts/${postID}/comments`, {
     headers: { Authorization: `Bearer ${auth.token}` },
   })
 }

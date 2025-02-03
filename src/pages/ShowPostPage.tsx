@@ -17,10 +17,13 @@ import { likePost, unlikePost } from '../utils/api/likes'
 import { timeAgo } from '../utils/date'
 
 function ShowPostPage() {
-  const post = useLoaderData() as post
+  const { post, comments } = useLoaderData() as {
+    post: post
+    comments: comment[]
+  }
   const navigate = useNavigate()
   const [, setDummy] = useState(true)
-  const [comment, setComment] = useState<comment[]>(post.comments)
+  const [comment, setComment] = useState<comment[]>(comments)
   const [commentBody, setCommentBody] = useState<string>('')
   const { postID } = useParams()
 
@@ -95,7 +98,7 @@ function ShowPostPage() {
         <button
           className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
           type='button'
-          onClick={() => navigate('..')}
+          onClick={() => navigate(-1)}
         >
           <FontAwesomeIcon
             icon={faHouse}

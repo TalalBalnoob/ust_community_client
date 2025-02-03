@@ -36,7 +36,7 @@ function LoginPage() {
           className='flex flex-col items-center justify-between'
         >
           <input
-            className='w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 focus:outline-none'
+            className='input_style'
             type='text'
             name='username'
             id='username'
@@ -50,7 +50,7 @@ function LoginPage() {
             required
           />
           <input
-            className='w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 focus:outline-none'
+            className='input_style'
             type='password'
             name='password'
             id='password'

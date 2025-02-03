@@ -21,6 +21,7 @@
 }
 
 body {
+  overflow-x: hidden;
   font-family:
     'Roboto',
     system-ui,
@@ -57,10 +58,6 @@ body {
   }
 }
 
-::-webkit-scrollbar {
-  background-color: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gray-500 dark:bg-green-400;
+.input_style {
+  @apply w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none;
 }
