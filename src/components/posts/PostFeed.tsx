@@ -6,12 +6,15 @@ import Post from '../posts/Post'
 
 function PostFeed() {
   const [posts, setPosts] = useState<post[]>([])
-  const [dummy, setDummy] = useState(true)
+  // page counter to support pagination
   const [page, setPage] = useState<number>(1)
+  // dummy state to force rerender when needed
+  const [dummy, setDummy] = useState(true)
 
   const { auth } = useAuth()
 
   useEffect(() => {
+    // fetch the post based on page
     const fetchPosts = async () => {
       try {
         const res = await fetchAllPosts(auth, page)
@@ -25,11 +28,13 @@ function PostFeed() {
   }, [page, dummy, auth])
 
   useEffect(() => {
+    // handel the pagination on scroll
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handelScroll = (e: any) => {
       const scrollHeight = e.target.documentElement.scrollHeight
       const currentHeight =
         e.target.documentElement.scrollTop + window.innerHeight
+      // when reach the end fetch the next page
       if (currentHeight + 1 >= scrollHeight) setPage(page + 1)
     }
 
@@ -37,6 +42,7 @@ function PostFeed() {
     return () => window.removeEventListener('scroll', handelScroll)
   }, [page])
 
+  // use the dummy state to trigger the render
   const triggerRerender = () => {
     setDummy((v) => !v)
   }

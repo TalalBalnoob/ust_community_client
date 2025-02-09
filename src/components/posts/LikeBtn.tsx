@@ -15,6 +15,7 @@ function LikeBtn({ isLiked, likes, onClick }: propsType) {
       className='flex items-center gap-1'
       onClick={onClick}
     >
+      {/* color it based on the isLiked state */}
       {isLiked ? (
         <FontAwesomeIcon
           icon={solidHeart}
@@ -26,6 +27,7 @@ function LikeBtn({ isLiked, likes, onClick }: propsType) {
           className='text-zinc-400'
         />
       )}
+      {/* number of likes */}
       <p className='text-sm'> {likes}</p>
     </button>
   )

@@ -27,6 +27,7 @@ function App() {
       path: '/login',
       element: auth ? <Navigate to={'/'} /> : <LoginPage />,
     },
+    // all the protected routes
     {
       errorElement: <NotFoundPage />,
       element: <PrivateRoutes />,

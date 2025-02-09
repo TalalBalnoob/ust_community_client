@@ -18,6 +18,7 @@ function HomePage() {
         />
       </nav>
       <PostFeed />
+      {/* only phone tab barw */}
       <MobileTabBar />
     </div>
   )
