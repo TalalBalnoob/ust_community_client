@@ -7,6 +7,12 @@ export const fetchUserProfile = async (userID: string, auth: AuthData) => {
   })
 }
 
+export const editUserProfile = async (formData: FormData, auth: AuthData) => {
+  return await axios.post('/user/profile', formData, {
+    headers: { Authorization: `Bearer ${auth.token}` },
+  })
+}
+
 export const fetchUserFollowers = async (userID: string, auth: AuthData) => {
   return await axios.get(`/user/profile/${userID}/followers`, {
     headers: { Authorization: `Bearer ${auth.token}` },

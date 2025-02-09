@@ -1,17 +1,34 @@
 import React, { useState } from 'react'
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import { getAuth } from '../context/AuthProvider'
 import { userProfile } from '../types/userProfile.type'
+import { editUserProfile } from '../utils/api/userProfile'
 
 function EditUserProfilePage() {
+  const auth = getAuth()
+  const navigate = useNavigate()
   const { profile } = useLoaderData() as userProfile
   const [username, setUsername] = useState(profile.displayName ?? '')
   const [bio, setBio] = useState<string>(profile.bio ?? '')
   const [attachment, setAttachment] = useState<File | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission logic here
-    console.log('User Profile Updated:', { username, bio, attachment })
+    try {
+      const formData = new FormData()
+      formData.append('username', username)
+      formData.append('bio', bio)
+      if (attachment) formData.append('attachment', attachment)
+
+      const { status, data } = await editUserProfile(formData, auth)
+
+      console.log(status, data)
+
+      if (status === 200) navigate('/profile')
+      else throw new Error('something went wrong...')
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -71,7 +88,11 @@ function EditUserProfilePage() {
             className='w-full rounded border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none'
           />
         </label>
-        <button>Save</button>
+        <div className='w-full text-center'>
+          <button className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'>
+            Save
+          </button>
+        </div>
       </form>
     </div>
   )

@@ -35,7 +35,7 @@ function CurrentUserProfilePage() {
           <div className='user_info flex flex-col'>
             <h1 className='flex items-baseline gap-x-2 text-2xl'>
               {id === auth.userData.id ? (
-                <button className=''>
+                <button onClick={() => navigate('/profile/edit')}>
                   <FontAwesomeIcon
                     size='sm'
                     icon={faPen}
@@ -79,7 +79,7 @@ function CurrentUserProfilePage() {
           <div className='mr-2'>
             {profile.imageUrl ? (
               <img
-                src={'/vite.svg'}
+                src={`${import.meta.env.VITE_BASE_URL}/storage/${profile.imageUrl}`}
                 alt=''
                 className='size-24 rounded-md'
               />

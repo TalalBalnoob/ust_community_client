@@ -75,7 +75,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
         {post.user.imageUrl ? (
           // user image
           <img
-            src={post.user.imageUrl}
+            src={`${import.meta.env.VITE_BASE_URL}/storage/${post.user.imageUrl}`}
             alt=''
             className='size-9 rounded-md'
           />
