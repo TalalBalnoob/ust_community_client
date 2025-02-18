@@ -6,6 +6,7 @@ import PostFeed from './posts/PostFeed'
 import PrivateComponent from './PrivateComponent'
 import CustomProfileComment from './profile/CustomProfileComment'
 import ProfilePostFeed from './profile/PostFeed'
+import SearchFeed from './SearchFeed'
 
 export {
   Comment,
@@ -16,4 +17,5 @@ export {
   PostFeed,
   PrivateComponent,
   ProfilePostFeed,
+  SearchFeed,
 }

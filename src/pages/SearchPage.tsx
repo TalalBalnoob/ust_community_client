@@ -1,17 +1,29 @@
-import { useRef } from 'react'
-import { MobileTabBar } from '../components'
+import { useRef, useState } from 'react'
+import { MobileTabBar, SearchFeed } from '../components'
 import useAuth from '../context/AuthProvider'
+import { post } from '../types/posts.type'
+import { staff, student, userProfile } from '../types/userProfile.type'
 import { search } from '../utils/api/search'
 
 function SearchPage() {
   const { auth } = useAuth()
+
+  const [posts, setPosts] = useState<post[]>([])
+  const [usersList, setUsersList] = useState<userProfile<student | staff>[]>()
+
   const searchRef = useRef<HTMLInputElement>(null)
+
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (searchRef.current) {
-      console.log(await search(searchRef.current.value, auth))
+    if (searchRef.current?.value) {
+      const res = await search(searchRef.current.value, auth)
+      console.log(res)
+
+      setPosts(res.data.posts)
+      setUsersList(res.data.users)
     }
   }
+
   return (
     <div className='h-screen w-screen'>
       <nav className='mr-auto flex h-14 items-center justify-between bg-zinc-900 text-3xl'>
@@ -26,7 +38,7 @@ function SearchPage() {
         >
           <label
             htmlFor='search'
-            className='mx-auto mt-10 block w-5/6'
+            className='mx-auto mt-0 block w-5/6'
           >
             <h1 className='text-right text-xl'>البحث</h1>
             <input
@@ -41,6 +53,14 @@ function SearchPage() {
             />
           </label>
         </form>
+        {usersList && posts ? (
+          <SearchFeed
+            usersList={usersList}
+            userPosts={posts}
+          />
+        ) : (
+          ''
+        )}
       </main>
       <MobileTabBar />
     </div>

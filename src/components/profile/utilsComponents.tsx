@@ -1,12 +1,15 @@
 import { comment, post } from '../../types/posts.type'
+import { staff, student, userProfile } from '../../types/userProfile.type'
 import Post from '../posts/Post'
 import CustomProfileComment from './CustomProfileComment'
+import UserListUserItem from './UserListUserItem'
 
 type RenderContentPopsType = {
   posts: post[]
   triggerRerender: () => void
-  comments: comment[]
-  view: 'posts' | 'comments'
+  comments?: comment[]
+  users?: userProfile<student | staff>[]
+  view: 'posts' | 'comments' | 'users'
 }
 
 export const RenderPosts = ({
@@ -25,7 +28,7 @@ export const RenderPosts = ({
       />
     ))
   }
-  return <h1>لا يوجد منشورات</h1>
+  return <h1 className='mt-20 text-center'>لم يتم العثور على اي منشورات</h1>
 }
 
 export const RenderComments = ({ comments }: { comments: comment[] }) => {
@@ -37,13 +40,30 @@ export const RenderComments = ({ comments }: { comments: comment[] }) => {
       />
     ))
   }
-  return <h1>لا يوجد تعليقات</h1>
+  return <h1 className='mt-20 text-center'>لم يتم العثور على اي تعليقات</h1>
+}
+
+export const RenderUsers = ({
+  users,
+}: {
+  users: userProfile<student | staff>[]
+}) => {
+  if (users.length > 0) {
+    return users.map((user) => (
+      <UserListUserItem
+        userData={user}
+        key={user.id}
+      />
+    ))
+  }
+  return <h1 className='mt-20 text-center'>لم يتم العثور على اي مستخدمين</h1>
 }
 
 export const RenderContent = ({
   view,
   posts,
   comments,
+  users,
   triggerRerender,
 }: RenderContentPopsType) => {
   return view === 'posts' ? (
@@ -51,7 +71,11 @@ export const RenderContent = ({
       posts={posts}
       triggerRerender={triggerRerender}
     />
-  ) : (
+  ) : view === 'comments' && comments ? (
     <RenderComments comments={comments} />
+  ) : view === 'users' && users ? (
+    <RenderUsers users={users} />
+  ) : (
+    ''
   )
 }

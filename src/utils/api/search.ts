@@ -5,7 +5,7 @@ import axios from './axios'
 
 type searchRes = {
   posts: post[]
-  users: userProfile<student | staff>
+  users: userProfile<student | staff>[]
 }
 
 export const search = async (searchText: string, auth: AuthData) => {
