@@ -102,9 +102,21 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       >
         <div className='mt-1'>
           {/* post body text */}
+          {post.title ? (
+            <h1
+              className='mb-1 mt-2.5 text-xl text-white'
+              style={{
+                textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
+              }}
+            >
+              {post.title}
+            </h1>
+          ) : (
+            ''
+          )}
           <div className='my-2'>
             <p
-              className='text-left leading-7'
+              className='line-clamp-3 text-left text-sm leading-6 text-zinc-200/[0.95]'
               // set the text align based the the language
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',

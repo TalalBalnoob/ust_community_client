@@ -5,7 +5,7 @@ import {
   faShareSquare,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 import { Comment, LikeBtn, PrivateComponent } from '../components'
@@ -15,6 +15,7 @@ import axios from '../utils/api/axios'
 import { deleteComment } from '../utils/api/delete'
 import { likePost, unlikePost } from '../utils/api/likes'
 import { timeAgo } from '../utils/date'
+import useLanguageDetection from '../utils/lang/LanguageDetector'
 
 function ShowPostPage() {
   const { post, comments } = useLoaderData() as {
@@ -26,6 +27,8 @@ function ShowPostPage() {
   const [comment, setComment] = useState<comment[]>(comments)
   const [commentBody, setCommentBody] = useState<string>('')
   const { postID } = useParams()
+
+  const { detectedLanguage, detectLanguage } = useLanguageDetection()
 
   const { auth } = useAuth()
 
@@ -90,6 +93,12 @@ function ShowPostPage() {
     }
   }
 
+  useEffect(() => {
+    // detect the body language
+    detectLanguage(post.body)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div className='h-screen w-screen'>
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
@@ -135,9 +144,31 @@ function ShowPostPage() {
           </div>
           {/* Post Body */}
           <div className='mt-1'>
-            <div className='my-2'>
-              <p className='text-left leading-7'>{post?.body}</p>
+            {/* post body text */}
+            {post.title ? (
+              <h1
+                className='mb-3 mt-2.5 text-xl text-white'
+                style={{
+                  textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
+                }}
+              >
+                {post.title}
+              </h1>
+            ) : (
+              ''
+            )}
+            <div className='my-3'>
+              <p
+                className='text-left text-sm leading-6 text-zinc-200/[0.95]'
+                // set the text align based the the language
+                style={{
+                  textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
+                }}
+              >
+                {post.body}
+              </p>
             </div>
+
             <div>
               {post?.attachment_url ? (
                 <img

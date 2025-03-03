@@ -1,8 +1,10 @@
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useEffect } from 'react'
 import Avatar from 'react-avatar'
 import { comment } from '../types/posts.type'
 import { timeAgo } from '../utils/date'
+import useLanguageDetection from '../utils/lang/LanguageDetector'
 import PrivateComponent from './PrivateComponent'
 
 type propsType = {
@@ -11,6 +13,13 @@ type propsType = {
 }
 
 function Comment({ comment, handleDeleteComment }: propsType) {
+  const { detectedLanguage, detectLanguage } = useLanguageDetection()
+
+  useEffect(() => {
+    // detect the body language
+    detectLanguage(comment.body)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <div className='block h-fit w-full border-b border-t border-gray-200/10 p-3'>
       {/* User top info */}
@@ -50,7 +59,14 @@ function Comment({ comment, handleDeleteComment }: propsType) {
       {/* comment Body */}
       <div className='mt-1'>
         <div className='my-2'>
-          <p className='text-left leading-7'>{comment.body}</p>
+          <p
+            className='text-left leading-6'
+            style={{
+              textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
+            }}
+          >
+            {comment.body}
+          </p>
         </div>
         <div>
           {comment.attachment_url ? (
