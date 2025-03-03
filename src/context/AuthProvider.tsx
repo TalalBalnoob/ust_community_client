@@ -5,7 +5,7 @@ import { logout as logoutAPI } from '../utils/api/auth'
 export const getAuth = (): AuthData => {
   // TODO: add a check request to check if token still valid
   const tokenString = localStorage.getItem('auth')
-  const userToken = JSON.parse(tokenString as string)
+  const userToken: AuthData = JSON.parse(tokenString as string)
   return userToken
 }
 

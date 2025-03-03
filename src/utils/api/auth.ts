@@ -25,3 +25,11 @@ export const logout = async (auth: AuthData) => {
     },
   )
 }
+
+export const checkToken = async (auth: AuthData) => {
+  return await axios.get('/token', {
+    headers: {
+      Authorization: `Bearer ${auth.token}`,
+    },
+  })
+}

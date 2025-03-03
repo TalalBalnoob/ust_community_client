@@ -1,5 +1,6 @@
+import { useEffect } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
-import useAuth from './context/AuthProvider'
+import useAuth, { getAuth } from './context/AuthProvider'
 import CreatePostPage from './pages/CreatePostPage'
 import EditPostPage from './pages/EditPostPage'
 import EditUserProfilePage from './pages/EditUserProfilePage'
@@ -18,10 +19,37 @@ import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
 import UserList from './pages/UsersList'
 import NotFoundPage from './pages/utils pages/NotFoundPage'
+import { checkToken } from './utils/api/auth'
 import PrivateRoutes from './utils/PrivateRoutes'
 
 function App() {
   const { auth } = useAuth()
+
+  useEffect(() => {
+    const validateAuth = async () => {
+      try {
+        const auth = getAuth() // Ensure `auth` is retrieved correctly
+
+        if (!auth || !auth.token) {
+          console.warn('No valid auth found')
+          localStorage.removeItem('auth')
+          return
+        }
+
+        const { status } = await checkToken(auth)
+        if (status !== 200) {
+          localStorage.removeItem('auth')
+          console.log('Auth token removed (invalid status)')
+        }
+      } catch (error) {
+        console.error('Error checking token:', error)
+        localStorage.removeItem('auth')
+      }
+    }
+
+    validateAuth()
+  }, [])
+
   const router = createBrowserRouter([
     {
       path: '/login',
