@@ -19,7 +19,7 @@ function CustomProfileComment({ comment }: propsType) {
         {/* User Image */}
         {comment.user.profile.imageUrl ? (
           <img
-            src={comment.user.profile.imageUrl}
+            src={`${import.meta.env.VITE_BASE_URL}/storage/${comment.user.profile.imageUrl}`}
             alt=''
             className='size-9 rounded-md'
           />
