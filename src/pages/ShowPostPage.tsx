@@ -123,7 +123,7 @@ function ShowPostPage() {
             {/* User Image */}
             {post?.user.imageUrl ? (
               <img
-                src={post?.user.imageUrl}
+                src={`${import.meta.env.VITE_BASE_URL}/storage/${post?.user.imageUrl}`}
                 alt=''
                 className='size-9 rounded-md'
               />

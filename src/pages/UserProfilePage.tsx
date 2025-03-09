@@ -4,23 +4,24 @@ import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { MobileTabBar, ProfilePostFeed } from '../components'
 import useAuth from '../context/AuthProvider'
-import { staff, student, userProfile } from '../types/userProfile.type'
+import {
+  ProfileType,
+  staff,
+  student,
+  userProfile,
+} from '../types/userProfile.type'
 
 function CurrentUserProfilePage() {
   const { auth } = useAuth()
   const { user_type_id, id, followers, following } =
     useLoaderData() as userProfile
-  type ProfileType<T extends number> = T extends 1
-    ? userProfile<student>
-    : T extends 2
-      ? userProfile<staff>
-      : never
+
   const { profile, posts, comments } =
     user_type_id === 1
       ? // eslint-disable-next-line react-hooks/rules-of-hooks
-        (useLoaderData() as ProfileType<1>)
+      (useLoaderData() as ProfileType<1>)
       : // eslint-disable-next-line react-hooks/rules-of-hooks
-        (useLoaderData() as ProfileType<2>)
+      (useLoaderData() as ProfileType<2>)
   const navigate = useNavigate()
 
   return (
@@ -28,27 +29,24 @@ function CurrentUserProfilePage() {
       <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
         <div className='w-10'></div>
         <h1>UST-C</h1>
-        <div className='w-10'></div>
+        {id === auth.userData.id ? (
+          <button
+            className='mr-2'
+            onClick={() => navigate('/profile/edit')}
+          >
+            <FontAwesomeIcon
+              size='sm'
+              icon={faPen}
+            />
+          </button>
+        ) : (
+          <div className='w-10'></div>
+        )}
       </nav>
       <main className='m-x-auto mt-3 w-full'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
-            <h1 className='flex items-baseline gap-x-2 text-2xl'>
-              {id === auth.userData.id ? (
-                <button onClick={() => navigate('/profile/edit')}>
-                  <FontAwesomeIcon
-                    size='sm'
-                    icon={faPen}
-                  />
-                </button>
-              ) : (
-                ''
-              )}
-              <p className='text-sm text-gray-200/40'>
-                {user_type_id === 1
-                  ? `مستوى ${(profile as student).level}`
-                  : 'موظف'}
-              </p>{' '}
+            <h1 className='flex items-baseline justify-end gap-x-2 text-2xl'>
               {profile.displayName}
             </h1>
             <div>
@@ -57,6 +55,11 @@ function CurrentUserProfilePage() {
                   ? (profile as student).major
                   : (profile as staff).role}
               </h3>
+              <p className='text-sm text-gray-200/40'>
+                {user_type_id === 1
+                  ? `مستوى ${(profile as student).level}`
+                  : 'موظف'}
+              </p>{' '}
             </div>
             <div className='mt-auto flex'>
               <div

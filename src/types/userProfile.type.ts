@@ -41,3 +41,9 @@ export interface userProfile<t = student> {
   posts: post[]
   comments: comment[]
 }
+
+export type ProfileType<T extends number> = T extends 1
+  ? userProfile<student>
+  : T extends 2
+  ? userProfile<staff>
+  : never
