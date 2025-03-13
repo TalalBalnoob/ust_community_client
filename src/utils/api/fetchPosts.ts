@@ -1,3 +1,4 @@
+import { postPage } from '../../types'
 import { AuthData } from '../../types/auth.type'
 import { comment, post } from '../../types/posts.type'
 import axios from './axios'
@@ -5,8 +6,8 @@ import axios from './axios'
 export const fetchAllPosts = async (
   auth: AuthData,
   page?: number,
-): Promise<post[]> => {
-  const res = await axios.get<post[]>(`/posts?page=${page}`, {
+): Promise<postPage> => {
+  const res = await axios.get<postPage>(`/posts?page=${page}`, {
     withCredentials: true,
     headers: { Authorization: `Bearer ${auth.token}` },
   })

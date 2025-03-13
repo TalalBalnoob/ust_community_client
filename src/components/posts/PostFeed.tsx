@@ -18,7 +18,7 @@ function PostFeed() {
     const fetchPosts = async () => {
       try {
         const res = await fetchAllPosts(auth, page)
-        setPosts((posts) => [...posts, ...res])
+        setPosts((posts) => [...posts, ...res.data])
       } catch (e) {
         console.error(e)
       }
