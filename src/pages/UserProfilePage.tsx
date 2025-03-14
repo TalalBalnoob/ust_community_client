@@ -2,7 +2,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
-import { MobileTabBar, ProfilePostFeed } from '../components'
+import { ProfilePostFeed, TabBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import {
   ProfileType,
@@ -19,9 +19,9 @@ function CurrentUserProfilePage() {
   const { profile, posts, comments } =
     user_type_id === 1
       ? // eslint-disable-next-line react-hooks/rules-of-hooks
-      (useLoaderData() as ProfileType<1>)
+        (useLoaderData() as ProfileType<1>)
       : // eslint-disable-next-line react-hooks/rules-of-hooks
-      (useLoaderData() as ProfileType<2>)
+        (useLoaderData() as ProfileType<2>)
   const navigate = useNavigate()
 
   return (
@@ -43,7 +43,7 @@ function CurrentUserProfilePage() {
           <div className='w-10'></div>
         )}
       </nav>
-      <main className='m-x-auto mt-3 w-full'>
+      <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
             <h1 className='flex items-baseline justify-end gap-x-2 text-2xl'>
@@ -109,7 +109,7 @@ function CurrentUserProfilePage() {
           userComments={comments}
         />
       </main>
-      <MobileTabBar />
+      <TabBar />
     </div>
   )
 }

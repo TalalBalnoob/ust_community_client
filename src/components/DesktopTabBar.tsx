@@ -9,29 +9,28 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const SideBar = () => {
+const DesktopSideBar = () => {
   return (
     <>
-      <div className='h-14 w-screen'></div>
-      <div className='fixed bottom-0 flex min-h-fit w-screen border-t border-t-zinc-800/80 bg-zinc-900 pb-2'>
-        <SideBarIcon
+      <div className='fixed right-0 top-14 flex h-full w-fit flex-col justify-center bg-zinc-900 pb-40'>
+        <DesktopSideBarIcon
           path={'/'}
           icon={faHome}
           shadow-lg
         />
-        <SideBarIcon
+        <DesktopSideBarIcon
           path={'/search'}
           icon={faSearch}
         />
-        <SideBarIcon
+        <DesktopSideBarIcon
           path={'/create'}
           icon={faPenToSquare}
         />
-        <SideBarIcon
+        <DesktopSideBarIcon
           path={'/notifications'}
           icon={faBell}
         />
-        <SideBarIcon
+        <DesktopSideBarIcon
           path={'/profile'}
           icon={faUser}
         />
@@ -40,7 +39,7 @@ const SideBar = () => {
   )
 }
 
-const SideBarIcon = ({
+const DesktopSideBarIcon = ({
   icon,
   path,
 }: {
@@ -56,10 +55,10 @@ const SideBarIcon = ({
       style={
         location.pathname === path
           ? {
-            borderRadius: '0.75rem',
-            backgroundColor: '#e4e4e7',
-            color: '#18181b',
-          }
+              borderRadius: '0.75rem',
+              backgroundColor: '#e4e4e7',
+              color: '#18181b',
+            }
           : {}
       }
       onClick={() => navigate(path)}
@@ -69,4 +68,4 @@ const SideBarIcon = ({
   )
 }
 
-export default SideBar
+export default DesktopSideBar

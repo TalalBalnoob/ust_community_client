@@ -116,8 +116,8 @@ function ShowPostPage() {
         </button>
       </nav>
 
-      <main>
-        <div className='h-fit w-full border-b border-t border-gray-200/10 p-3'>
+      <main className='w-1/2 lg:mx-auto lg:w-1/2'>
+        <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>
           {/* User top info */}
           <div className='flex items-start gap-2'>
             {/* User Image */}
@@ -172,7 +172,7 @@ function ShowPostPage() {
             <div>
               {post?.attachment_url ? (
                 <img
-                  className='rounded'
+                  className='size-fit rounded'
                   src={`${import.meta.env.VITE_BASE_URL}/storage/${post.attachment_url}`}
                   alt=''
                 />
@@ -220,7 +220,7 @@ function ShowPostPage() {
           </div>
         </div>
       </main>
-      <div>
+      <div className='lg:mx-auto lg:w-1/2'>
         <form
           method='post'
           className='mt-2'
@@ -249,15 +249,17 @@ function ShowPostPage() {
           </div>
         </form>
       </div>
-      {comment.map((comment) => {
-        return (
-          <Comment
-            comment={comment}
-            key={comment.id}
-            handleDeleteComment={handleDeleteComment}
-          />
-        )
-      })}
+      <div className='lg:mx-auto lg:w-1/2'>
+        {comment.map((comment) => {
+          return (
+            <Comment
+              comment={comment}
+              key={comment.id}
+              handleDeleteComment={handleDeleteComment}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

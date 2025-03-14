@@ -53,7 +53,7 @@ function CreatePostPage() {
         </NavLink>
       </nav>
       <form
-        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4'
+        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4'
         onSubmit={handlePostSubmit}
       >
         <label

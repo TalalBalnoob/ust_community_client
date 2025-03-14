@@ -1,4 +1,5 @@
 import Comment from './Comment'
+import DesktopSideBar from './DesktopTabBar'
 import MobileTabBar from './MobileTabBar'
 import LikeBtn from './posts/LikeBtn'
 import Post from './posts/Post'
@@ -7,10 +8,12 @@ import PrivateComponent from './PrivateComponent'
 import CustomProfileComment from './profile/CustomProfileComment'
 import ProfilePostFeed from './profile/PostFeed'
 import SearchFeed from './SearchFeed'
+import TabBar from './TabBar'
 
 export {
   Comment,
   CustomProfileComment,
+  DesktopSideBar,
   LikeBtn,
   MobileTabBar,
   Post,
@@ -18,4 +21,5 @@ export {
   PrivateComponent,
   ProfilePostFeed,
   SearchFeed,
+  TabBar,
 }

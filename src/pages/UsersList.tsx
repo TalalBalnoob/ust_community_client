@@ -23,14 +23,16 @@ function UserList() {
           />
         </button>
       </nav>
-      {data.map((userItem) => {
-        return (
-          <UserListUserItem
-            key={userItem.id}
-            userData={userItem}
-          />
-        )
-      })}
+      <div className='mx-auto lg:w-1/2'>
+        {data.map((userItem) => {
+          return (
+            <UserListUserItem
+              key={userItem.id}
+              userData={userItem}
+            />
+          )
+        })}
+      </div>
     </div>
   )
 }

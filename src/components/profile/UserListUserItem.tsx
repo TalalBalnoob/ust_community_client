@@ -11,7 +11,7 @@ function UserListUserItem({
   const navigate = useNavigate()
   const { auth } = useAuth()
   return (
-    <div className='h-fit w-full border-b border-t border-gray-200/10 p-3'>
+    <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>
       {/* User top info */}
       <div
         className='flex w-fit cursor-default items-start gap-2'

@@ -48,7 +48,7 @@ function PostFeed() {
   }
 
   return (
-    <>
+    <div className='mx-auto lg:w-2/4'>
       {posts.map((post) => (
         <Post
           post={post}
@@ -56,7 +56,7 @@ function PostFeed() {
           triggerRerender={triggerRerender}
         />
       ))}
-    </>
+    </div>
   )
 }
 

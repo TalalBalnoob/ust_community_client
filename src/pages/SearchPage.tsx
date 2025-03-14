@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { MobileTabBar, SearchFeed } from '../components'
+import { SearchFeed, TabBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types/posts.type'
 import { staff, student, userProfile } from '../types/userProfile.type'
@@ -62,7 +62,7 @@ function SearchPage() {
           ''
         )}
       </main>
-      <MobileTabBar />
+      <TabBar />
     </div>
   )
 }
