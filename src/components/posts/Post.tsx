@@ -129,7 +129,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           <div>
             {post.attachment_url ? (
               <img
-                className='rounded'
+                className='mx-auto aspect-square w-[80%] rounded'
                 src={`${import.meta.env.VITE_BASE_URL}/storage/${post.attachment_url}`}
                 alt=''
               />

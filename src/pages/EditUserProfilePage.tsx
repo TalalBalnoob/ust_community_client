@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useLoaderData, useNavigate } from 'react-router-dom'
+import { TopBar } from '../components'
 import { getAuth } from '../context/AuthProvider'
 import { userProfile } from '../types/userProfile.type'
 import { editUserProfile } from '../utils/api/userProfile'
@@ -39,14 +40,10 @@ function EditUserProfilePage() {
 
   return (
     <div>
-      <nav className='mr-auto flex h-14 items-center justify-between bg-zinc-900 text-3xl'>
-        <div></div>
-        <h1 className='mx-auto'>UST-C</h1>
-        <div></div>
-      </nav>
+      <TopBar className='border-b-transparent' />
       <form
         onSubmit={handleSubmit}
-        className='mx-auto w-[90%] text-right'
+        className='mx-auto w-[90%] text-right lg:mx-auto lg:w-1/2'
       >
         <label
           htmlFor='username'

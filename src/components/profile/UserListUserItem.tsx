@@ -23,7 +23,7 @@ function UserListUserItem({
         {/* User Image */}
         {userData.profile.imageUrl ? (
           <img
-            src={userData.profile.imageUrl}
+            src={`${import.meta.env.VITE_BASE_URL}/storage/${userData.profile.imageUrl}`}
             alt=''
             className='size-9 rounded-md'
           />

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { SearchFeed, TabBar } from '../components'
+import { SearchFeed, TabBar, TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types/posts.type'
 import { staff, student, userProfile } from '../types/userProfile.type'
@@ -26,12 +26,8 @@ function SearchPage() {
 
   return (
     <div className='h-screen w-screen'>
-      <nav className='mr-auto flex h-14 items-center justify-between bg-zinc-900 text-3xl'>
-        <div className='w-10'></div>
-        <h1>UST-C</h1>
-        <div className='w-10'></div>
-      </nav>
-      <main>
+      <TopBar />
+      <main className='lg:mx-auto lg:w-1/2'>
         <form
           action=''
           onSubmit={(e) => submitHandler(e)}

@@ -2,6 +2,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
 
@@ -34,24 +35,25 @@ function CreatePostPage() {
 
   return (
     <div className='text-right'>
-      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
-        <div className='w-10'></div>
-        <h1 className='mt-2 text-center text-4xl'>منشور جديد</h1>
-        <NavLink
-          to='..'
-          end
-        >
-          <button
-            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-            type='button'
+      <TopBar
+        title='إتشاء منشور جديد'
+        right={
+          <NavLink
+            to='..'
+            end
           >
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              size='xl'
-            />
-          </button>
-        </NavLink>
-      </nav>
+            <button
+              className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
+              type='button'
+            >
+              <FontAwesomeIcon
+                icon={faCircleXmark}
+                size='xl'
+              />
+            </button>
+          </NavLink>
+        }
+      />
       <form
         className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4'
         onSubmit={handlePostSubmit}

@@ -9,6 +9,7 @@ import CustomProfileComment from './profile/CustomProfileComment'
 import ProfilePostFeed from './profile/PostFeed'
 import SearchFeed from './SearchFeed'
 import TabBar from './TabBar'
+import TopBar from './ui/TopBar'
 
 export {
   Comment,
@@ -22,4 +23,5 @@ export {
   ProfilePostFeed,
   SearchFeed,
   TabBar,
+  TopBar,
 }

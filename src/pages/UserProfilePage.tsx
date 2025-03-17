@@ -2,7 +2,7 @@ import { faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
-import { ProfilePostFeed, TabBar } from '../components'
+import { ProfilePostFeed, TabBar, TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import {
   ProfileType,
@@ -26,23 +26,23 @@ function CurrentUserProfilePage() {
 
   return (
     <div className='h-screen w-screen'>
-      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
-        <div className='w-10'></div>
-        <h1>UST-C</h1>
-        {id === auth.userData.id ? (
-          <button
-            className='mr-2'
-            onClick={() => navigate('/profile/edit')}
-          >
-            <FontAwesomeIcon
-              size='sm'
-              icon={faPen}
-            />
-          </button>
-        ) : (
-          <div className='w-10'></div>
-        )}
-      </nav>
+      <TopBar
+        right={
+          id === auth.userData.id ? (
+            <button
+              className='mr-2'
+              onClick={() => navigate('/profile/edit')}
+            >
+              <FontAwesomeIcon
+                size='sm'
+                icon={faPen}
+              />
+            </button>
+          ) : (
+            <div className='w-10'></div>
+          )
+        }
+      />
       <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>

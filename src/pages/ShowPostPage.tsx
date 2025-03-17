@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
-import { Comment, LikeBtn, PrivateComponent } from '../components'
+import { Comment, LikeBtn, PrivateComponent, TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import { comment, post } from '../types/posts.type'
 import axios from '../utils/api/axios'
@@ -36,7 +36,6 @@ function ShowPostPage() {
     e.preventDefault()
 
     try {
-      console.log('hi i am here')
       const res = await axios.post(
         `/posts/${post.id}/comments`,
         { body: commentBody },
@@ -101,20 +100,20 @@ function ShowPostPage() {
 
   return (
     <div className='h-screen w-screen'>
-      <nav className='mr-auto flex h-14 items-center justify-between bg-transparent text-3xl'>
-        <div className='w-10'></div>
-        <h1>UST-C</h1>
-        <button
-          className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-          type='button'
-          onClick={() => navigate(-1)}
-        >
-          <FontAwesomeIcon
-            icon={faHouse}
-            size='xl'
-          />
-        </button>
-      </nav>
+      <TopBar
+        right={
+          <button
+            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
+            type='button'
+            onClick={() => navigate(-1)}
+          >
+            <FontAwesomeIcon
+              icon={faHouse}
+              size='xl'
+            />
+          </button>
+        }
+      />
 
       <main className='w-1/2 lg:mx-auto lg:w-1/2'>
         <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>

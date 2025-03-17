@@ -28,14 +28,14 @@ function SearchFeed({
             className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'users' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
             onClick={() => setView('users')}
           >
-            حسابات
+            ({usersList.length}) حسابات
           </button>
           <button
             value={'posts'}
             className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'posts' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
             onClick={() => setView('posts')}
           >
-            المنشورات
+            ({posts.length}) المنشورات
           </button>
         </div>
 
