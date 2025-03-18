@@ -48,7 +48,7 @@ function PostFeed() {
   }
 
   return (
-    <div className='mx-auto lg:w-2/4'>
+    <div className='mx-auto lg:w-2/4 xl:w-1/3'>
       {posts.map((post) => (
         <Post
           post={post}

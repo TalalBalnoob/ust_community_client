@@ -43,7 +43,7 @@ function EditUserProfilePage() {
       <TopBar className='border-b-transparent' />
       <form
         onSubmit={handleSubmit}
-        className='mx-auto w-[90%] text-right lg:mx-auto lg:w-1/2'
+        className='mx-auto w-[90%] text-right lg:mx-auto lg:w-1/2 xl:w-1/3'
       >
         <label
           htmlFor='username'

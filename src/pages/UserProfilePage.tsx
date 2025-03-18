@@ -43,7 +43,7 @@ function CurrentUserProfilePage() {
           )
         }
       />
-      <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2'>
+      <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
             <h1 className='flex items-baseline justify-end gap-x-2 text-2xl'>

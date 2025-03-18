@@ -55,7 +55,7 @@ function CreatePostPage() {
         }
       />
       <form
-        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4'
+        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4 xl:w-1/3'
         onSubmit={handlePostSubmit}
       >
         <label

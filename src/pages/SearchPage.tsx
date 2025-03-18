@@ -27,7 +27,7 @@ function SearchPage() {
   return (
     <div className='h-screen w-screen'>
       <TopBar />
-      <main className='lg:mx-auto lg:w-1/2'>
+      <main className='lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <form
           action=''
           onSubmit={(e) => submitHandler(e)}

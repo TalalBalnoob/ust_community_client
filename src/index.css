@@ -62,3 +62,30 @@ body {
 .input_style {
   @apply w-full border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none;
 }
+
+/* Make the scrollbar smaller */
+::-webkit-scrollbar {
+  width: 4px;
+  /* For vertical scrollbar */
+  height: 4px;
+  /* For horizontal scrollbar */
+}
+
+/* Style the scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Style the scrollbar thumb (draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+  min-height: 50px;
+  /* Makes the thumb taller */
+  width: 4px;
+  /* Forces the thumb to be wider */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

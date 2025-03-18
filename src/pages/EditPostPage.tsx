@@ -1,3 +1,4 @@
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
 import {
@@ -65,7 +66,7 @@ function EditPostPage() {
         }
       />
       <form
-        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4'
+        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-1/2'
         onSubmit={handlePostSubmit}
       >
         <label
@@ -103,13 +104,13 @@ function EditPostPage() {
         </label>
         <button
           type='submit'
-          className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'
+          className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4 lg:w-2/5'
         >
           نشر
         </button>
         <button
           type='button'
-          className='mt-4 w-3/4 rounded bg-red-800 p-2 px-4 focus:bg-red-700'
+          className='mt-4 w-3/4 rounded bg-red-800 p-2 px-4 focus:bg-red-700 lg:w-2/5'
           onClick={handleDeletePost}
         >
           حذف المنشور
