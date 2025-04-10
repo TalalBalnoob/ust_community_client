@@ -14,6 +14,7 @@ import {
   userProfileLoader,
 } from './pages/loaders'
 import LoginPage from './pages/LoginPage'
+import NotificationsPage from './pages/NotificationsPage'
 import SearchPage from './pages/SearchPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
@@ -107,6 +108,10 @@ function App() {
           path: '/users/:userID/followings',
           element: <UserList />,
           loader: userFollowingsLoader,
+        },
+        {
+          path: '/notifications',
+          element: <NotificationsPage />,
         },
       ],
     },

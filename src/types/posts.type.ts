@@ -10,7 +10,7 @@ export interface post {
   updated_at: string
   isLiked: boolean
   likes: number
-  user: student | staff
+  profile: student | staff
   comments: comment[]
 }
 

@@ -1,7 +1,7 @@
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
@@ -36,22 +36,18 @@ function CreatePostPage() {
   return (
     <div className='text-right'>
       <TopBar
-        title='إتشاء منشور جديد'
+        title='إنشاء منشور جديد'
         right={
-          <NavLink
-            to='..'
-            end
+          <button
+            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
+            type='button'
+            onClick={() => navigate(-1)}
           >
-            <button
-              className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-              type='button'
-            >
-              <FontAwesomeIcon
-                icon={faCircleXmark}
-                size='xl'
-              />
-            </button>
-          </NavLink>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              size='xl'
+            />
+          </button>
         }
       />
       <form

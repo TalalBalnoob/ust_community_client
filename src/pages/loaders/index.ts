@@ -49,7 +49,9 @@ export const userProfileLoader = async ({
 }
 
 // ------------- Profile ----------------
-export const CurrentUserProfileLoader = async (): Promise<userProfile> => {
+export const CurrentUserProfileLoader = async (): Promise<
+  userProfile | Response
+> => {
   const auth = getAuth()
 
   if (!auth) return redirect('/login')
@@ -61,7 +63,7 @@ export const CurrentUserProfileLoader = async (): Promise<userProfile> => {
 
 export const userFollowersLoader = async ({
   params,
-}: LoaderFunctionArgs): Promise<userProfile<student | staff>[]> => {
+}: LoaderFunctionArgs): Promise<userProfile<student | staff>[] | Response> => {
   const { userID } = params
   const auth = getAuth()
 
@@ -74,7 +76,7 @@ export const userFollowersLoader = async ({
 
 export const userFollowingsLoader = async ({
   params,
-}: LoaderFunctionArgs): Promise<userProfile<student | staff>[]> => {
+}: LoaderFunctionArgs): Promise<userProfile<student | staff>[] | Response> => {
   const { userID } = params
   const auth = getAuth()
 

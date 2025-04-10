@@ -19,9 +19,9 @@ function CurrentUserProfilePage() {
   const { profile, posts, comments } =
     user_type_id === 1
       ? // eslint-disable-next-line react-hooks/rules-of-hooks
-        (useLoaderData() as ProfileType<1>)
+      (useLoaderData() as ProfileType<1>)
       : // eslint-disable-next-line react-hooks/rules-of-hooks
-        (useLoaderData() as ProfileType<2>)
+      (useLoaderData() as ProfileType<2>)
   const navigate = useNavigate()
 
   return (
@@ -29,15 +29,17 @@ function CurrentUserProfilePage() {
       <TopBar
         right={
           id === auth.userData.id ? (
-            <button
-              className='mr-2'
-              onClick={() => navigate('/profile/edit')}
-            >
-              <FontAwesomeIcon
-                size='sm'
-                icon={faPen}
-              />
-            </button>
+            <div className='w-10'>
+              <button
+                className='mr-2 lg:hidden'
+                onClick={() => navigate('/profile/edit')}
+              >
+                <FontAwesomeIcon
+                  size='sm'
+                  icon={faPen}
+                />
+              </button>
+            </div>
           ) : (
             <div className='w-10'></div>
           )
@@ -46,7 +48,20 @@ function CurrentUserProfilePage() {
       <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
-            <h1 className='flex items-baseline justify-end gap-x-2 text-2xl'>
+            <h1 className='flex items-baseline justify-end gap-x-1 text-2xl'>
+              {id === auth.userData.id ? (
+                <button
+                  className='mr-2 hidden lg:block'
+                  onClick={() => navigate('/profile/edit')}
+                >
+                  <FontAwesomeIcon
+                    size='sm'
+                    icon={faPen}
+                  />
+                </button>
+              ) : (
+                ''
+              )}
               {profile.displayName}
             </h1>
             <div>

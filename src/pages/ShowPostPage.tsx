@@ -1,6 +1,6 @@
 import { faComment } from '@fortawesome/free-regular-svg-icons'
 import {
-  faHouse,
+  faArrowRight,
   faPen,
   faShareSquare,
 } from '@fortawesome/free-solid-svg-icons'
@@ -108,45 +108,53 @@ function ShowPostPage() {
             onClick={() => navigate(-1)}
           >
             <FontAwesomeIcon
-              icon={faHouse}
+              icon={faArrowRight}
               size='xl'
             />
           </button>
         }
       />
 
-      <main className='w-1/2 lg:mx-auto lg:w-1/2'>
+      <main className='w-1/2 lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>
           {/* User top info */}
-          <div className='flex items-start gap-2'>
-            {/* User Image */}
-            {post?.user.imageUrl ? (
-              <img
-                src={`${import.meta.env.VITE_BASE_URL}/storage/${post?.user.imageUrl}`}
-                alt=''
-                className='size-9 rounded-md'
-              />
-            ) : (
-              <Avatar
-                name={`${post?.user.displayName}`}
-                size='36'
-                round={'6px'}
-              />
-            )}
+          <div
+            className='flex w-full items-center justify-end gap-2'
+            onClick={() => {
+              if (post.user_id === auth.userData.id) navigate('/profile')
+              else navigate(`/users/${post.user_id}`)
+            }}
+          >
             {/* User name */}
             <div className='flex items-baseline gap-2'>
-              <h4 className='text-white'>{post?.user.displayName}</h4>
               <p className='text-sm text-white/50'>
                 {post ? timeAgo(post?.created_at as string) : ''}
               </p>
+              <h4 className='text-white xl:text-lg'>
+                {post?.profile.displayName}
+              </h4>
             </div>
+            {/* User Image */}
+            {post?.profile.imageUrl ? (
+              <img
+                src={`${import.meta.env.VITE_BASE_URL}/storage/${post?.profile.imageUrl}`}
+                alt=''
+                className='size-10 rounded-md'
+              />
+            ) : (
+              <Avatar
+                name={`${post?.profile.displayName}`}
+                size='42'
+                round={'6px'}
+              />
+            )}
           </div>
           {/* Post Body */}
           <div className='mt-1'>
             {/* post body text */}
             {post.title ? (
               <h1
-                className='mb-3 mt-2.5 text-xl text-white'
+                className='mb-3 mt-2.5 text-xl text-white xl:text-2xl'
                 style={{
                   textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
                 }}
@@ -158,7 +166,7 @@ function ShowPostPage() {
             )}
             <div className='my-3'>
               <p
-                className='text-left text-sm leading-6 text-zinc-200/[0.95]'
+                className='text-left text-sm leading-6 text-zinc-200/[0.95] xl:text-base'
                 // set the text align based the the language
                 style={{
                   textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
@@ -219,7 +227,7 @@ function ShowPostPage() {
           </div>
         </div>
       </main>
-      <div className='lg:mx-auto lg:w-1/2'>
+      <div className='lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <form
           method='post'
           className='mt-2'
@@ -248,7 +256,7 @@ function ShowPostPage() {
           </div>
         </form>
       </div>
-      <div className='lg:mx-auto lg:w-1/2'>
+      <div className='lg:mx-auto lg:w-1/2 xl:w-1/3'>
         {comment.map((comment) => {
           return (
             <Comment

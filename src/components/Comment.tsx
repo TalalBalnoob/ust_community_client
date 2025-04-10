@@ -2,6 +2,8 @@ import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect } from 'react'
 import Avatar from 'react-avatar'
+import { useNavigate } from 'react-router-dom'
+import useAuth from '../context/AuthProvider'
 import { comment } from '../types/posts.type'
 import { timeAgo } from '../utils/date'
 import useLanguageDetection from '../utils/lang/LanguageDetector'
@@ -14,6 +16,8 @@ type propsType = {
 
 function Comment({ comment, handleDeleteComment }: propsType) {
   const { detectedLanguage, detectLanguage } = useLanguageDetection()
+  const navigate = useNavigate()
+  const { auth } = useAuth()
 
   useEffect(() => {
     // detect the body language
@@ -23,7 +27,30 @@ function Comment({ comment, handleDeleteComment }: propsType) {
   return (
     <div className='block h-fit w-full border-b border-t border-gray-200/10 p-3'>
       {/* User top info */}
-      <div className='flex w-full items-center gap-2'>
+      <div
+        className='flex w-full items-center justify-end gap-2'
+        onClick={() => {
+          if (comment.user_id === auth.userData.id) navigate('/profile')
+          else navigate(`/users/${comment.user_id}`)
+        }}
+      >
+        <PrivateComponent
+          ownerId={comment.user_id}
+          component={
+            <button className='mr-auto flex items-center gap-1'>
+              <FontAwesomeIcon
+                icon={faTrashCan}
+                className='text-zinc-400'
+                onClick={() => handleDeleteComment(comment.id)}
+              />
+            </button>
+          }
+        />
+        {/* User name */}
+        <div className='flex items-baseline gap-2'>
+          <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
+          <h4 className='text-white'>{comment.user.profile.displayName}</h4>
+        </div>
         {/* User Image */}
         {comment.user.profile.imageUrl ? (
           <img
@@ -38,29 +65,12 @@ function Comment({ comment, handleDeleteComment }: propsType) {
             round={'6px'}
           />
         )}
-        {/* User name */}
-        <div className='flex items-baseline gap-2'>
-          <h4 className='text-white'>{comment.user.profile.displayName}</h4>
-          <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
-        </div>
-        <PrivateComponent
-          ownerId={comment.user_id}
-          component={
-            <button className='ml-auto flex items-center gap-1'>
-              <FontAwesomeIcon
-                icon={faTrashCan}
-                className='text-zinc-400'
-                onClick={() => handleDeleteComment(comment.id)}
-              />
-            </button>
-          }
-        />
       </div>
       {/* comment Body */}
       <div className='mt-1'>
         <div className='my-2'>
           <p
-            className='text-left leading-6'
+            className='text-left text-sm leading-6 xl:text-base'
             style={{
               textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
             }}

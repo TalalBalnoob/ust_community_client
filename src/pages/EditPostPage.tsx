@@ -1,12 +1,7 @@
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useEffect, useState } from 'react'
-import {
-  NavLink,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from 'react-router-dom'
+import { useLoaderData, useNavigate, useParams } from 'react-router-dom'
 import { TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import { post } from '../types/posts.type'
@@ -49,20 +44,16 @@ function EditPostPage() {
       <TopBar
         title='تعديل المنشور'
         right={
-          <NavLink
-            to='..'
-            end
+          <button
+            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
+            onClick={() => navigate(-1)}
+            type='button'
           >
-            <button
-              className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-              type='button'
-            >
-              <FontAwesomeIcon
-                icon={faCircleXmark}
-                size='xl'
-              />
-            </button>
-          </NavLink>
+            <FontAwesomeIcon
+              icon={faCircleXmark}
+              size='xl'
+            />
+          </button>
         }
       />
       <form
@@ -106,7 +97,7 @@ function EditPostPage() {
           type='submit'
           className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4 lg:w-2/5'
         >
-          نشر
+          تعديل
         </button>
         <button
           type='button'

@@ -12,9 +12,6 @@ import useLanguageDetection from '../../utils/lang/LanguageDetector'
 import PrivateComponent from '../PrivateComponent'
 import LikeBtn from './LikeBtn'
 
-/* -------------------- Tasks -------------------------------- */
-// TODO: add title to the post
-/* -------------------- Tasks -------------------------------- */
 function Post({ post }: { post: post; triggerRerender: () => void }) {
   const { auth } = useAuth()
   // dummy state to force rerender when needed
@@ -24,6 +21,8 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
 
   // hook to detect the language of the post to set the align of the body
   const { detectedLanguage, detectLanguage } = useLanguageDetection()
+
+  console.log(post.profile.displayName, timeAgo(post.created_at))
 
   async function handleLikeToggle() {
     // check if the post is not liked by user to like it
@@ -65,34 +64,34 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
     <div className='h-fit w-full border-y border-gray-200/10 p-3 lg:border-x'>
       {/* User top info */}
       <div
-        className='flex w-fit cursor-default items-start gap-2'
+        className='flex w-full cursor-default items-start justify-end gap-2'
         onClick={() => {
           if (post.user_id === auth.userData.id) navigate('/profile')
           else navigate(`/users/${post.user_id}`)
         }}
       >
+        <div className='flex items-baseline gap-2'>
+          {/* formate the create time to a human readable formate  */}
+          <p className='text-sm text-white/50'>{timeAgo(post.created_at)}</p>
+          {/* User name */}
+          <h4 className='text-white'>{post.profile.displayName}</h4>
+        </div>
         {/* User Image */}
-        {post.user.imageUrl ? (
+        {post.profile.imageUrl ? (
           // user image
           <img
-            src={`${import.meta.env.VITE_BASE_URL}/storage/${post.user.imageUrl}`}
+            src={`${import.meta.env.VITE_BASE_URL}/storage/${post.profile.imageUrl}`}
             alt=''
             className='size-9 rounded-md'
           />
         ) : (
           // if he don't have image use clint generated one
           <Avatar
-            name={`${post.user.displayName}`}
+            name={`${post.profile.displayName}`}
             size='36'
             round={'6px'}
           />
         )}
-        <div className='flex items-baseline gap-2'>
-          {/* User name */}
-          <h4 className='text-white'>{post.user.displayName}</h4>
-          {/* formate the create time to a human readable formate  */}
-          <p className='text-sm text-white/50'>{timeAgo(post.created_at)}</p>
-        </div>
       </div>
       {/* Post Body */}
       {/* link to show the post page of this post */}
