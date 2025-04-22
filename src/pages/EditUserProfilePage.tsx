@@ -43,11 +43,11 @@ function EditUserProfilePage() {
       <TopBar className='border-b-transparent' />
       <form
         onSubmit={handleSubmit}
-        className='mx-auto w-[90%] text-right lg:mx-auto lg:w-1/2 xl:w-1/3'
+        className='mx-auto mt-24 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4 xl:w-1/3'
       >
         <label
           htmlFor='username'
-          className='w-3/4 text-lg'
+          className='flex w-full flex-col text-lg items-end'
         >
           اسم المستخدم
           <input
@@ -60,7 +60,7 @@ function EditUserProfilePage() {
         </label>
         <label
           htmlFor='description'
-          className='w-3/4 text-lg'
+          className='flex w-full flex-col text-lg items-end'
         >
           الوصف
           <textarea
@@ -73,7 +73,7 @@ function EditUserProfilePage() {
         </label>
         <label
           htmlFor='attachment'
-          className='flex flex-col text-lg'
+          className='flex flex-col items-end text-lg'
         >
           صورة شخصية
           <input
@@ -82,16 +82,26 @@ function EditUserProfilePage() {
             id='attachment'
             onChange={handleFileChange}
             accept='application/pdf, image/png, image/jpeg'
-            className='w-full rounded border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none'
+            className='block w-full rounded px-3 py-1.5 text-right text-base shadow sm:text-sm/6 input_style'
           />
         </label>
         <div className='w-full text-center'>
-          <button className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'>
-            Save
+          <button
+            type='submit'
+            className='mt-4 w-3/4 rounded bg-sec/80 text-zinc-200 p-2 px-4'
+          >
+            حفظ
+          </button>
+          <button
+            className='mt-1 w-2/3 rounded bg-transparent text-sec border border-red-300 hover:bg-red-300 p-2 px-4'
+            type='button'
+            onClick={() => navigate(-1)}
+          >
+            تراجع
           </button>
         </div>
       </form>
-    </div>
+    </div >
   )
 }
 

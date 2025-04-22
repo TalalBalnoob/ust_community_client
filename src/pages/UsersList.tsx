@@ -24,7 +24,7 @@ function UserList() {
           </button>
         }
       />
-      <div className='mx-auto lg:w-1/2 xl:w-1/3'>
+      <div className='mx-auto lg:mt-20 lg:w-1/2 xl:w-1/3'>
         {data.map((userItem) => {
           return (
             <UserListUserItem

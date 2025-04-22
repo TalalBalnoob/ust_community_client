@@ -115,8 +115,8 @@ function ShowPostPage() {
         }
       />
 
-      <main className='w-1/2 lg:mx-auto lg:w-1/2 xl:w-1/3'>
-        <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>
+      <main className='w-1/2 lg:mx-auto lg:mt-24 lg:w-1/2 xl:w-1/3'>
+        <div className='h-fit w-full border-b border-t bg-slate-50 border-gray-200/10 p-3 lg:border-x'>
           {/* User top info */}
           <div
             className='flex w-full items-center justify-end gap-2'
@@ -127,10 +127,10 @@ function ShowPostPage() {
           >
             {/* User name */}
             <div className='flex items-baseline gap-2'>
-              <p className='text-sm text-white/50'>
+              <p className='text-sm '>
                 {post ? timeAgo(post?.created_at as string) : ''}
               </p>
-              <h4 className='text-white xl:text-lg'>
+              <h4 className='xl:text-lg'>
                 {post?.profile.displayName}
               </h4>
             </div>
@@ -154,7 +154,7 @@ function ShowPostPage() {
             {/* post body text */}
             {post.title ? (
               <h1
-                className='mb-3 mt-2.5 text-xl text-white xl:text-2xl'
+                className='mb-3 mt-2.5 text-xl text-sec/90 xl:text-2xl'
                 style={{
                   textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
                 }}
@@ -166,7 +166,7 @@ function ShowPostPage() {
             )}
             <div className='my-3'>
               <p
-                className='text-left text-sm leading-6 text-zinc-200/[0.95] xl:text-base'
+                className='text-left text-sm leading-6 text-sec/[0.95] xl:text-base'
                 // set the text align based the the language
                 style={{
                   textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
@@ -200,14 +200,14 @@ function ShowPostPage() {
             <button className='flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faComment}
-                className='text-zinc-400'
+                className='text-sec/80'
               />
               <p className='text-sm'>{post?.comments.length}</p>
             </button>
             <button className='flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faShareSquare}
-                className='text-zinc-400'
+                className='text-sec/80'
               />
             </button>
             <PrivateComponent
@@ -219,7 +219,7 @@ function ShowPostPage() {
                 >
                   <FontAwesomeIcon
                     icon={faPen}
-                    className='text-zinc-400'
+                    className='text-sec/80'
                   />
                 </button>
               }
@@ -237,7 +237,7 @@ function ShowPostPage() {
             name=''
             id=''
             placeholder='اكتب تعليقك هنا'
-            className='w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='input_style'
             rows={3}
             required
             onChange={(e) => setCommentBody(e.target.value)}
@@ -246,7 +246,7 @@ function ShowPostPage() {
           <div className='flex items-center justify-between'>
             <button
               type='submit'
-              className='m-2 h-fit rounded bg-zinc-600 p-2 px-4'
+              className=' rounded bg-sec/80 text-zinc-200 p-2 px-4'
             >
               نشر
             </button>

@@ -11,14 +11,15 @@ function UserListUserItem({
   const navigate = useNavigate()
   const { auth } = useAuth()
   return (
-    <div className='h-fit w-full border-b border-t border-gray-200/10 p-3 lg:border-x'>
+    <div className='h-fit w-full border-b border-t hover:bg-slate-100 border-neutral-800/10 p-3 lg:border-x'
+      onClick={() => {
+        if (userData.id === auth.userData.id) navigate('/profile')
+        else navigate(`/users/${userData.id}`)
+      }}
+    >
       {/* User top info */}
       <div
         className='flex w-fit cursor-default items-start gap-2'
-        onClick={() => {
-          if (userData.id === auth.userData.id) navigate('/profile')
-          else navigate(`/users/${userData.id}`)
-        }}
       >
         {/* User Image */}
         {userData.profile.imageUrl ? (
@@ -36,7 +37,7 @@ function UserListUserItem({
         )}
         {/* User name */}
         <div className='flex items-baseline gap-2'>
-          <h4 className='text-white'>{userData.profile.displayName}</h4>
+          <h4 className='text-sec'>{userData.profile.displayName}</h4>
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { TopBar } from '../components'
+import { TabBar, TopBar } from '../components'
 import useAuth from '../context/AuthProvider'
 import axios from '../utils/api/axios'
 
@@ -36,22 +36,10 @@ function CreatePostPage() {
   return (
     <div className='text-right'>
       <TopBar
-        title='إنشاء منشور جديد'
-        right={
-          <button
-            className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'
-            type='button'
-            onClick={() => navigate(-1)}
-          >
-            <FontAwesomeIcon
-              icon={faCircleXmark}
-              size='xl'
-            />
-          </button>
-        }
+        center={'إنشاء منشور جديد'}
       />
       <form
-        className='mx-auto mt-4 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4 xl:w-1/3'
+        className='mx-auto mt-24 flex w-3/4 flex-col items-center justify-center gap-4 lg:w-2/4 xl:w-1/3'
         onSubmit={handlePostSubmit}
       >
         <label
@@ -69,7 +57,7 @@ function CreatePostPage() {
             placeholder='العنوان'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base shadow sm:text-sm/6 input_style'
           />
         </label>
         <label
@@ -84,7 +72,7 @@ function CreatePostPage() {
             required
             value={body}
             onChange={(e) => setBody(e.target.value)}
-            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base text-zinc-200 outline outline-1 -outline-offset-1 outline-zinc-700 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-zinc-500 sm:text-sm/6'
+            className='block w-full rounded bg-zinc-800 px-3 py-1.5 text-right text-base shadow sm:text-sm/6 input_style'
           />
         </label>
         <label
@@ -98,17 +86,25 @@ function CreatePostPage() {
             id='attachment'
             onChange={handleFileChange}
             accept='application/pdf, image/png, image/jpeg'
-            className='w-full rounded border border-gray-200/10 bg-zinc-800 p-1 px-2 text-right focus:outline-none'
+            className='block w-full rounded px-3 py-1.5 text-right text-base shadow sm:text-sm/6 input_style'
           />
         </label>
 
         <button
           type='submit'
-          className='mt-4 w-3/4 rounded bg-zinc-600 p-2 px-4'
+          className='mt-4 w-3/4 rounded bg-sec/80 text-zinc-200 p-2 px-4'
         >
           نشر
         </button>
+        <button
+          className='mt-1 w-2/3 rounded bg-transparent text-sec border border-red-300 hover:bg-red-300 p-2 px-4'
+          type='button'
+          onClick={() => navigate(-1)}
+        >
+          حذف
+        </button>
       </form>
+      <TabBar />
     </div>
   )
 }

@@ -14,7 +14,7 @@ function CustomProfileComment({ comment }: propsType) {
   return (
     <div
       onClick={() => navigate(`/posts/${comment.post_id}`)}
-      className='block h-fit w-full border-b border-t border-gray-200/10 p-3'
+      className='block h-fit w-full border hover:bg-slate-50 border-neutral-700/10  p-3'
     >
       {/* User top info */}
       <div
@@ -26,8 +26,8 @@ function CustomProfileComment({ comment }: propsType) {
       >
         {/* User name */}
         <div className='flex items-baseline gap-2'>
-          <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
-          <h4 className='text-white'>{comment.user.profile.displayName}</h4>
+          <p className='text-sm text-black/50'>{timeAgo(comment.created_at)}</p>
+          <h4 className=''>{comment.user.profile.displayName}</h4>
         </div>
         {/* User Image */}
         {comment.user.profile.imageUrl ? (

@@ -27,25 +27,8 @@ function CurrentUserProfilePage() {
   return (
     <div className='h-screen w-screen'>
       <TopBar
-        right={
-          id === auth.userData.id ? (
-            <div className='w-10'>
-              <button
-                className='mr-2 lg:hidden'
-                onClick={() => navigate('/profile/edit')}
-              >
-                <FontAwesomeIcon
-                  size='sm'
-                  icon={faPen}
-                />
-              </button>
-            </div>
-          ) : (
-            <div className='w-10'></div>
-          )
-        }
       />
-      <main className='m-x-auto mt-3 w-full lg:mx-auto lg:w-1/2 xl:w-1/3'>
+      <main className='m-x-auto mt-3 lg:mt-24 w-full lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
             <h1 className='flex items-baseline justify-end gap-x-1 text-2xl'>
@@ -57,6 +40,7 @@ function CurrentUserProfilePage() {
                   <FontAwesomeIcon
                     size='sm'
                     icon={faPen}
+                    className='text-zinc-500'
                   />
                 </button>
               ) : (
@@ -70,7 +54,7 @@ function CurrentUserProfilePage() {
                   ? (profile as student).major
                   : (profile as staff).role}
               </h3>
-              <p className='text-sm text-gray-200/40'>
+              <p className='text-sm text-sec/80'>
                 {user_type_id === 1
                   ? `مستوى ${(profile as student).level}`
                   : 'موظف'}

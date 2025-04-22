@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const DesktopSideBar = () => {
   return (
     <>
-      <div className='fixed right-1 top-14 flex h-full w-fit flex-col justify-center bg-zinc-900 pb-40'>
+      <div className=' fixed top-14 right-0 flex h-screen items-start flex-col justify-start px-2 w-fit bg-sec'>
         <DesktopSideBarIcon
           path={'/'}
           icon={faHome}
@@ -51,14 +51,15 @@ const DesktopSideBarIcon = ({
 
   return (
     <div
-      className='sidebar-icon'
+      className='sidebar-icon bg-primary text-[#e4e4e7]'
       style={
         location.pathname === path
           ? {
-              borderRadius: '0.75rem',
-              backgroundColor: '#e4e4e7',
-              color: '#18181b',
-            }
+            borderRadius: '0.75rem',
+            border: '1px solid #18181b',
+            backgroundColor: '#e4e4e7',
+            color: '#2E3439'
+          }
           : {}
       }
       onClick={() => navigate(path)}

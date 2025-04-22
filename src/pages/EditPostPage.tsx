@@ -42,7 +42,7 @@ function EditPostPage() {
   return (
     <div className='text-right'>
       <TopBar
-        title='تعديل المنشور'
+        center={'تعديل المنشور'}
         right={
           <button
             className='mx-2 rounded-sm bg-transparent px-2 py-1 text-sm'

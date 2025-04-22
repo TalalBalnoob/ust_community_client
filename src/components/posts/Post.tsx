@@ -61,7 +61,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
   }, [])
 
   return (
-    <div className='h-fit w-full border-y border-gray-200/10 p-3 lg:border-x'>
+    <div className='h-fit w-full hover:bg-slate-50 border-y border-neutral-700/10 p-3 lg:border-x'>
       {/* User top info */}
       <div
         className='flex w-full cursor-default items-start justify-end gap-2'
@@ -72,9 +72,9 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
       >
         <div className='flex items-baseline gap-2'>
           {/* formate the create time to a human readable formate  */}
-          <p className='text-sm text-white/50'>{timeAgo(post.created_at)}</p>
+          <p className='text-sm text-black/50'>{timeAgo(post.created_at)}</p>
           {/* User name */}
-          <h4 className='text-white'>{post.profile.displayName}</h4>
+          <h4 className=''>{post.profile.displayName}</h4>
         </div>
         {/* User Image */}
         {post.profile.imageUrl ? (
@@ -103,7 +103,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           {/* post body text */}
           {post.title ? (
             <h1
-              className='mb-1 mt-2.5 text-xl text-white'
+              className='mb-1 mt-2.5 text-xl'
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
               }}
@@ -115,7 +115,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           )}
           <div className='my-2'>
             <p
-              className='line-clamp-3 text-left text-sm leading-6 text-zinc-200/[0.95]'
+              className='line-clamp-3 text-left text-sm leading-6 text-black/[0.95]'
               // set the text align based the the language
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
@@ -149,19 +149,19 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
         />
         {/* Comments */}
         <button
-          className='flex items-center gap-1'
+          className='flex  items-center gap-1'
           onClick={() => navigate(`/posts/${post.id}`)}
         >
           <FontAwesomeIcon
             icon={faComment}
-            className='text-zinc-400'
+            className='text-zinc-500'
           />
           <p className='text-sm'>{post.comments.length}</p>
         </button>
         <button className='flex items-center gap-1'>
           <FontAwesomeIcon
             icon={faShareSquare}
-            className='text-zinc-400'
+            className='text-zinc-500'
           />
         </button>
         {/* edit post shows only for the post owner */}

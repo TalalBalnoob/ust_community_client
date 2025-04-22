@@ -24,7 +24,7 @@ function LikeBtn({ isLiked, likes, onClick }: propsType) {
       ) : (
         <FontAwesomeIcon
           icon={outlineHeart}
-          className='text-zinc-400'
+          className='text-sec/80'
         />
       )}
       {/* number of likes */}

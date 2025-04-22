@@ -2,18 +2,19 @@ import { ReactNode } from 'react'
 
 type PropsType = {
   right?: ReactNode
-  title?: string
+  center?: ReactNode
   left?: ReactNode
   className?: string
 }
 
-const TopBar = ({ right, title, left, className }: PropsType) => {
+const TopBar = ({ right, center, left, className }: PropsType) => {
   return (
     <nav
-      className={`mr-auto flex h-14 w-screen items-center justify-between border-b border-gray-200/10 bg-zinc-900 text-3xl lg:mb-12 ${className}`}
+      className={`mr-auto fixed top-0 px-10 flex h-14 w-screen items-center justify-between border-b border-gray-200/10 bg-primary text-3xl 
+                  text-white ${className}`}
     >
       {left ? left : <div className='w-10'></div>}
-      <h1>{title ? title : 'UST-C'}</h1>
+      {center ? center : <div className='w-10'></div>}
       {right ? right : <div className='w-10'></div>}
     </nav>
   )

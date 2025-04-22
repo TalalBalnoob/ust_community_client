@@ -25,7 +25,7 @@ function Comment({ comment, handleDeleteComment }: propsType) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
-    <div className='block h-fit w-full border-b border-t border-gray-200/10 p-3'>
+    <div className='block h-fit w-full border border-neutral-700/10 p-3'>
       {/* User top info */}
       <div
         className='flex w-full items-center justify-end gap-2'
@@ -40,7 +40,7 @@ function Comment({ comment, handleDeleteComment }: propsType) {
             <button className='mr-auto flex items-center gap-1'>
               <FontAwesomeIcon
                 icon={faTrashCan}
-                className='text-zinc-400'
+                className='text-sec/80 '
                 onClick={() => handleDeleteComment(comment.id)}
               />
             </button>
@@ -48,8 +48,8 @@ function Comment({ comment, handleDeleteComment }: propsType) {
         />
         {/* User name */}
         <div className='flex items-baseline gap-2'>
-          <p className='text-sm text-white/50'>{timeAgo(comment.created_at)}</p>
-          <h4 className='text-white'>{comment.user.profile.displayName}</h4>
+          <p className='text-sm text-black/50'>{timeAgo(comment.created_at)}</p>
+          <h4 className=''>{comment.user.profile.displayName}</h4>
         </div>
         {/* User Image */}
         {comment.user.profile.imageUrl ? (
