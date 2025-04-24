@@ -22,8 +22,6 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
   // hook to detect the language of the post to set the align of the body
   const { detectedLanguage, detectLanguage } = useLanguageDetection()
 
-  console.log(post.profile.displayName, timeAgo(post.created_at))
-
   async function handleLikeToggle() {
     // check if the post is not liked by user to like it
     if (!post.isLiked) {

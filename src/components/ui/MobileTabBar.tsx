@@ -28,7 +28,7 @@ const SideBar = () => {
           icon={faPenToSquare}
         />
         <SideBarIcon
-          path={'/notifications'}
+          path={'/activity'}
           icon={faBell}
         />
         <SideBarIcon

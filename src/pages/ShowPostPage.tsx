@@ -77,6 +77,7 @@ function ShowPostPage() {
     }
   }
 
+  // TODO: add real conformation model
   async function handleDeleteComment(commentID: number) {
     const confirmation = confirm('هل انت متأكد من حذف التعليق؟')
     if (!confirmation) return 0
@@ -95,8 +96,7 @@ function ShowPostPage() {
   useEffect(() => {
     // detect the body language
     detectLanguage(post.body)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [post.body])
 
   return (
     <div className='h-screen w-screen'>

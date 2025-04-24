@@ -17,7 +17,6 @@ function SearchPage() {
     e.preventDefault()
     if (searchRef.current?.value) {
       const res = await search(searchRef.current.value, auth)
-      console.log(res)
 
       setPosts(res.data.posts)
       setUsersList(res.data.users)

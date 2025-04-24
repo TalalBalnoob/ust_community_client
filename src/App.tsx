@@ -6,6 +6,7 @@ import EditPostPage from './pages/EditPostPage'
 import EditUserProfilePage from './pages/EditUserProfilePage'
 import HomePage from './pages/HomePage'
 import {
+  ActivityLoader,
   CurrentUserProfileLoader,
   editPostLoader,
   postLoader,
@@ -14,7 +15,7 @@ import {
   userProfileLoader,
 } from './pages/loaders'
 import LoginPage from './pages/LoginPage'
-import NotificationsPage from './pages/NotificationsPage'
+import NotificationsPage from './pages/ActivityPage'
 import SearchPage from './pages/SearchPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
@@ -22,6 +23,7 @@ import UserList from './pages/UsersList'
 import NotFoundPage from './pages/utils pages/NotFoundPage'
 import { checkToken } from './utils/api/auth'
 import PrivateRoutes from './utils/PrivateRoutes'
+import ActivityPage from './pages/ActivityPage'
 
 function App() {
   const { auth } = useAuth()
@@ -32,7 +34,6 @@ function App() {
         const auth = getAuth() // Ensure `auth` is retrieved correctly
 
         if (!auth || !auth.token) {
-          console.warn('No valid auth found')
           localStorage.removeItem('auth')
           return
         }
@@ -40,10 +41,8 @@ function App() {
         const { status } = await checkToken(auth)
         if (status !== 200) {
           localStorage.removeItem('auth')
-          console.log('Auth token removed (invalid status)')
         }
       } catch (error) {
-        console.error('Error checking token:', error)
         localStorage.removeItem('auth')
       }
     }
@@ -110,8 +109,9 @@ function App() {
           loader: userFollowingsLoader,
         },
         {
-          path: '/notifications',
-          element: <NotificationsPage />,
+          path: '/activity',
+          element: <ActivityPage />,
+          loader: ActivityLoader
         },
       ],
     },

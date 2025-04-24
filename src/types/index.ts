@@ -21,3 +21,18 @@ interface Link {
   label: string
   active: boolean
 }
+
+export interface Activity {
+  id: string
+  type: string
+  notifiable_type: string
+  notifiable_id: number
+  data: {
+    message: string
+    ar_message: string
+    post_id: string
+  }
+  read_at: string | null
+  created_at: string
+  updated_at: string
+}

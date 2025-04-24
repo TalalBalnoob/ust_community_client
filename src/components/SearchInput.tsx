@@ -15,7 +15,6 @@ function SearchInput({ label, className }: { label?: ReactNode, className?: stri
     e.preventDefault()
     if (searchRef.current?.value) {
       const res = await search(searchRef.current.value, auth)
-      console.log(res)
 
       setPosts(res.data.posts)
       setUsersList(res.data.users)

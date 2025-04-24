@@ -27,7 +27,7 @@ const DesktopSideBar = () => {
           icon={faPenToSquare}
         />
         <DesktopSideBarIcon
-          path={'/notifications'}
+          path={'/activity'}
           icon={faBell}
         />
         <DesktopSideBarIcon

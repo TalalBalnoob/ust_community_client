@@ -1,7 +1,9 @@
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { getAuth } from '../../context/AuthProvider'
+import { Activity } from '../../types'
 import { comment, post } from '../../types/posts.type'
 import { staff, student, userProfile } from '../../types/userProfile.type'
+import { fetchActivity } from '../../utils/api/activity'
 import { fetchOnePost, fetchPostComments } from '../../utils/api/fetchPosts'
 import {
   fetchUserFollowers,
@@ -83,6 +85,18 @@ export const userFollowingsLoader = async ({
   if (!auth) return redirect('/login')
 
   const { data } = await fetchUserFollowings(userID as string, auth)
+
+  return data
+}
+
+export const ActivityLoader = async ({
+  params,
+}: LoaderFunctionArgs): Promise<Activity[] | Response> => {
+  const auth = getAuth()
+
+  if (!auth) return redirect('/login')
+
+  const { data } = await fetchActivity(auth)
 
   return data
 }

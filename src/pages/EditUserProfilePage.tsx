@@ -23,8 +23,6 @@ function EditUserProfilePage() {
 
       const { status, data } = await editUserProfile(formData, auth)
 
-      console.log(status, data)
-
       if (status === 200) navigate('/profile')
       else throw new Error('something went wrong...')
     } catch (e) {
