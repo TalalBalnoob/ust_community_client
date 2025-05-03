@@ -28,9 +28,10 @@ export interface Activity {
   notifiable_type: string
   notifiable_id: number
   data: {
-    message: string
-    ar_message: string
-    post_id: string
+    type: 'like' | 'comment' | 'follow'
+    username?: string
+    user_id?: string
+    post_id?: string
   }
   read_at: string | null
   created_at: string

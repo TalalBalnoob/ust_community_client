@@ -3,13 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Avatar from 'react-avatar'
 import { useLoaderData, useNavigate } from 'react-router-dom'
 import { ProfilePostFeed, TabBar, TopBar } from '../components'
-import useAuth from '../context/AuthProvider'
+import useAuth, { logout } from '../context/AuthProvider'
 import {
   ProfileType,
   staff,
   student,
   userProfile,
 } from '../types/userProfile.type'
+import { LogOut, Pen } from 'lucide-react'
 
 function CurrentUserProfilePage() {
   const { auth } = useAuth()
@@ -31,18 +32,25 @@ function CurrentUserProfilePage() {
       <main className='m-x-auto mt-3 lg:mt-24 w-full lg:mx-auto lg:w-1/2 xl:w-1/3'>
         <div className='flex w-full justify-end gap-x-3 text-right'>
           <div className='user_info flex flex-col'>
-            <h1 className='flex items-baseline justify-end gap-x-1 text-2xl'>
+            <h1 className='flex items-center justify-end gap-x-1 text-2xl'>
               {id === auth.userData.id ? (
-                <button
-                  className='mr-2 hidden lg:block'
-                  onClick={() => navigate('/profile/edit')}
-                >
-                  <FontAwesomeIcon
-                    size='sm'
-                    icon={faPen}
-                    className='text-zinc-500'
-                  />
-                </button>
+                <div className='flex justify-center'>
+                  <button
+                    className='mr-2 hidden lg:block'
+                    onClick={async () => {
+                      logout()
+                      navigate('/login')
+                    }}
+                  >
+                    <LogOut strokeWidth={3} color='#71717a' />
+                  </button>
+                  <button
+                    className='mr-2 hidden lg:block'
+                    onClick={() => navigate('/profile/edit')}
+                  >
+                    <Pen strokeWidth={3} color="#71717a" />
+                  </button>
+                </div>
               ) : (
                 ''
               )}
