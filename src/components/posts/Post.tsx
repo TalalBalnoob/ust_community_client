@@ -1,5 +1,5 @@
 import { faComment, faShareSquare } from '@fortawesome/free-regular-svg-icons'
-import { faPen } from '@fortawesome/free-solid-svg-icons'
+import { faBookmark, faPen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 import Avatar from 'react-avatar'
@@ -11,6 +11,8 @@ import { timeAgo } from '../../utils/date'
 import useLanguageDetection from '../../utils/lang/LanguageDetector'
 import PrivateComponent from '../PrivateComponent'
 import LikeBtn from './LikeBtn'
+import BookmarkBtn from './BookmarkBtn'
+import { bookmarkPost, unBookmarkPost } from '../../utils/api/bookmark'
 
 function Post({ post }: { post: post; triggerRerender: () => void }) {
   const { auth } = useAuth()
@@ -46,6 +48,33 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
         post.isLiked = false
         // update the likes counter
         post.likes--
+        // trigger rerender
+        setDummy((v) => !v)
+      }
+    }
+  }
+
+
+  async function handleBookmarkToggle() {
+    // check if the post is not liked by user to like it
+    if (!post.isBooked) {
+      const { status } = await bookmarkPost(post.id, auth)
+
+      // if the req respond with 200
+      if (status === 200) {
+        // update post's likes btn
+        post.isBooked = true
+        // trigger rerender
+        setDummy((v) => !v)
+      }
+      // check if the post is liked by user to unlike it
+    } else if (post.isBooked) {
+      const { status } = await unBookmarkPost(post.id, auth)
+
+      // if the req respond with 200
+      if (status === 200) {
+        // update post's likes btn
+        post.isBooked = false
         // trigger rerender
         setDummy((v) => !v)
       }
@@ -101,7 +130,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           {/* post body text */}
           {post.title ? (
             <h1
-              className='mb-1 mt-2.5 text-xl'
+              className='mb-1 mt-2.5 text-2xl'
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
               }}
@@ -113,7 +142,7 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           )}
           <div className='my-2'>
             <p
-              className='line-clamp-3 text-left text-sm leading-6 text-black/[0.95]'
+              className='line-clamp-3 text-left text-lg leading-6 text-black/[0.95]'
               // set the text align based the the language
               style={{
                 textAlign: detectedLanguage === 'arb' ? 'right' : 'left',
@@ -156,12 +185,8 @@ function Post({ post }: { post: post; triggerRerender: () => void }) {
           />
           <p className='text-sm'>{post.comments.length}</p>
         </button>
-        <button className='flex items-center gap-1'>
-          <FontAwesomeIcon
-            icon={faShareSquare}
-            className='text-zinc-500'
-          />
-        </button>
+        <BookmarkBtn isBooked={post.isBooked} onClick={handleBookmarkToggle} />
+
         {/* edit post shows only for the post owner */}
         <PrivateComponent
           ownerId={post.user_id}

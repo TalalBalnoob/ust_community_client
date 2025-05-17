@@ -9,7 +9,8 @@ type RenderContentPopsType = {
   triggerRerender: () => void
   comments?: comment[]
   users?: userProfile<student | staff>[]
-  view: 'posts' | 'comments' | 'users'
+  bookmarks?: post[]
+  view: 'posts' | 'comments' | 'users' | 'bookmarks'
 }
 
 export const RenderPosts = ({
@@ -21,6 +22,26 @@ export const RenderPosts = ({
 }) => {
   if (posts.length > 0) {
     return posts.map((post) => (
+      <Post
+        post={post}
+        key={post.id}
+        triggerRerender={triggerRerender}
+      />
+    ))
+  }
+  return <h1 className='mt-20 text-center'>لم يتم العثور على اي منشورات</h1>
+}
+
+
+export const RenderBookmarks = ({
+  bookmarks,
+  triggerRerender,
+}: {
+  bookmarks: post[]
+  triggerRerender: () => void
+}) => {
+  if (bookmarks.length > 0) {
+    return bookmarks.map((post) => (
       <Post
         post={post}
         key={post.id}
@@ -64,6 +85,7 @@ export const RenderContent = ({
   posts,
   comments,
   users,
+  bookmarks,
   triggerRerender,
 }: RenderContentPopsType) => {
   return view === 'posts' ? (
@@ -75,6 +97,10 @@ export const RenderContent = ({
     <RenderComments comments={comments} />
   ) : view === 'users' && users ? (
     <RenderUsers users={users} />
+  ) : view === 'bookmarks' && bookmarks ? (
+    <RenderBookmarks
+      triggerRerender={triggerRerender}
+      bookmarks={bookmarks} />
   ) : (
     ''
   )

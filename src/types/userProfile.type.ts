@@ -37,13 +37,15 @@ export interface userProfile<t = student> {
   updated_at: string
   following: number
   followers: number
+  isFollowed: boolean
   profile: t
   posts: post[]
+  bookmarks: post[]
   comments: comment[]
 }
 
 export type ProfileType<T extends number> = T extends 1
   ? userProfile<student>
   : T extends 2
-  ? userProfile<staff>
-  : never
+    ? userProfile<staff>
+    : never

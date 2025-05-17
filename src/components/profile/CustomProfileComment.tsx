@@ -26,7 +26,7 @@ function CustomProfileComment({ comment }: propsType) {
       >
         {/* User name */}
         <div className='flex items-baseline gap-2'>
-          <p className='text-sm text-black/50'>{timeAgo(comment.created_at)}</p>
+          <p className='text-lg text-black/50'>{timeAgo(comment.created_at)}</p>
           <h4 className=''>{comment.user.profile.displayName}</h4>
         </div>
         {/* User Image */}

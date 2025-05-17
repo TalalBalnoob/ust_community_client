@@ -59,6 +59,7 @@ export const CurrentUserProfileLoader = async (): Promise<
   if (!auth) return redirect('/login')
 
   const { data } = await fetchUserProfile(auth.userData.id.toString(), auth)
+  console.log(data)
 
   return data
 }

@@ -26,14 +26,14 @@ function LoginPage() {
   }
 
   return (
-    <div className='flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-bl'>
-      <h1 className='mb-6 text-center text-4xl font-bold text-white'>
+    <div className='flex h-screen w-screen flex-col items-center justify-center bg-gradient-to-bl bg-primary'>
+      <h1 className='mb-6 text-center text-4xl font-bold text-sec'>
         صفحة الدخول
       </h1>
       <div className='flex justify-center'>
         <form
           onSubmit={handleLogin}
-          className='flex flex-col items-center justify-between'
+          className='flex flex-col items-center justify-between gap-2'
         >
           <input
             className='input_style'

@@ -15,7 +15,6 @@ import {
   userProfileLoader,
 } from './pages/loaders'
 import LoginPage from './pages/LoginPage'
-import NotificationsPage from './pages/ActivityPage'
 import SearchPage from './pages/SearchPage'
 import ShowPostPage from './pages/ShowPostPage'
 import UserProfilePage from './pages/UserProfilePage'
@@ -111,7 +110,7 @@ function App() {
         {
           path: '/activity',
           element: <ActivityPage />,
-          loader: ActivityLoader
+          loader: ActivityLoader,
         },
       ],
     },

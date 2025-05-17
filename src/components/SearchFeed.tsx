@@ -25,14 +25,14 @@ function SearchFeed({
         <div className='flex'>
           <button
             value={'comments'}
-            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'users' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
+            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'users' ? 'bg-sec/80 text-zinc-200' : 'bg-transparent text-sec'}`}
             onClick={() => setView('users')}
           >
             ({usersList.length}) حسابات
           </button>
           <button
             value={'posts'}
-            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'posts' ? 'bg-zinc-200 text-zinc-900' : 'bg-transparent text-white'}`}
+            className={`mx-0 h-8 w-full border border-gray-200/30 ${view === 'posts' ? 'bg-sec/80 text-zinc-100' : 'bg-transparent text-sec'}`}
             onClick={() => setView('posts')}
           >
             ({posts.length}) المنشورات

@@ -9,6 +9,7 @@ export interface post {
   created_at: string
   updated_at: string
   isLiked: boolean
+  isBooked: boolean
   likes: number
   profile: student | staff
   comments: comment[]
